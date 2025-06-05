@@ -14,7 +14,7 @@
   <div class="content-page">
     <div class="nav">
       <div class="logo">
-        <img src="./img/INPROAIRES_LOGO_5.png" alt="">
+        <img src="./img/INPROAIRES_LOGO_5.png" alt="" loading="lazy">
       </div>
       <div class="list-items">
         <a href="" class="item active">Inicio</a>
@@ -28,7 +28,7 @@
     </div>
     <div class="section">
       <div class="background">
-        <img src="./img/fondo-refrigeracion2.png" alt="">
+        <img src="./img/fondo-refrigeracion2.png" alt="" loading="lazy">
       </div>
       <div class="content">
         <div class="title">
@@ -50,7 +50,7 @@
     </div>
     <div class="section">
       <div class="background">
-        <img src="./img/fondo-refrigeracion1.png" alt="">
+        <img src="./img/fondo-refrigeracion1.png" alt="" loading="lazy">
       </div>
       <div class="content">
         <div class="title">
@@ -97,15 +97,15 @@
       </div>
       <div class="bottom-content"></div>
       <div class="background">
-        <img src="./img/INPROAIRES_LOGO_10.png" alt="">
+        <img src="./img/INPROAIRES_LOGO_10.png" alt="" loading="lazy">
       </div>
     </div>
     <div class="redes-sociales left">
       <div class="item">
-        <img src="./img/facebook-icon.png" alt="">
+        <img src="./img/facebook-icon.png" alt="" loading="lazy">
       </div>
       <div class="item">
-        <img src="./img/instagram-icon.png" alt="">
+        <img src="./img/instagram-icon.png" alt="" loading="lazy">
       </div>
     </div>
     <div class="redes-sociales right">
