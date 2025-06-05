@@ -87,7 +87,7 @@
   /* color: white; */
   /* background-color: var(--azul-claro); */
   border-bottom: 2px solid var(--azul-claro);
-  box-shadow: inset 0px -10px 10px -20px var(--azul-claro);
+  box-shadow: inset 0px -10px 10px -10px var(--azul-claro);
 }
 
 .section {
