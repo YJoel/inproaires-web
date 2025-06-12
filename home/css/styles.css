@@ -75,7 +75,7 @@
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 90vh;
+  min-height: 90vh;
 }
 
 .row.section > .background {
@@ -85,12 +85,120 @@
   width: 100%;
   height: 100%;
   filter: brightness(0.8);
+  transition: filter 0.3s ease-in-out;
 }
 
 .row.section > .background img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.row.section > .content > .title > h1 {
+  transition: color 0.3s linear, text-shadow 0.5s linear,
+    letter-spacing 0.3s ease-out;
+}
+
+.row.section > .content > .title > h1.caption {
+  font-size: 4rem;
+}
+
+.row.section:hover > .content > .title > h1 {
+  text-shadow: 5px 5px 20px white;
+}
+
+.row.section:hover > .content > .title > h1.caption {
+  letter-spacing: 8px;
+}
+
+.row.section:hover > .content > .title > hr {
+  border: 4px solid var(--azul-claro);
+}
+
+.row.section > .content > .message > .clearfix {
+  position: relative;
+  width: 100%;
+  padding: 20px 0;
+}
+
+.row.section > .content > .message > .clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.row.section > .content > .message > .clearfix > img {
+  padding: 0 15px;
+}
+
+.row.section > .content > .message > .clearfix:nth-child(odd) > img {
+  float: left;
+}
+
+.row.section > .content > .message > .clearfix:nth-child(even) > img {
+  float: right;
+}
+
+.row.section > .content {
+  view-timeline-name: --image;
+  view-timeline-axis: block;
+  animation-timeline: --image;
+  animation-name: fadeInImage;
+  animation-range: entry 0% cover 50%;
+}
+
+.row.section > .content > .message > .clearfix > img {
+  position: relative;
+  width: 20%;
+  /* animation-timing-function: linear; */
+}
+
+@keyframes fadeInImage {
+  from {
+    opacity: 0;
+    scale: 0.7;
+    /* transform: translateY(100px); */
+  }
+
+  to {
+    opacity: 1;
+    scale: 1;
+    /* transform: translateY(0px); */
+  }
+}
+
+.row.section:hover > .background {
+  filter: brightness(0.5);
+}
+
+.row.section > .content > .row.clientes {
+  position: relative;
+  width: 80%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.row.section > .content > .row > .cliente {
+  position: relative;
+  background-color: white;
+  border-radius: 15%;
+  width: 12%;
+  margin: 2%;
+  padding: 0;
+  aspect-ratio: 1/1;
+}
+
+.row.section > .content > .row > .cliente > img {
+  width: 100%;
+  height: 100%;
+  vertical-align: middle;
+  object-fit: contain;
+}
+
+.row.section > .content > .row > .cliente:hover {
+  box-shadow: 0 0 20px white;
 }
 
 .row > .content {
