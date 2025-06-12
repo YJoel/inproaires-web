@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>INPROAIRES - HOME</title>
+  <title>INPROAIRES</title>
   <link rel="shortcut icon" href="http://localhost:3000/home/img/elice_inproaires_5.png" type="image/x-icon">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
@@ -54,65 +54,7 @@
       </div>
     </nav>
     <div class="row" id="content">
-      <div class="row section">
-        <div class="background">
-          <img src="./img/fondo-refrigeracion2.png" alt="" loading="lazy">
-        </div>
-        <div class="content">
-          <div class="title">
-            <h1>INPROAIRES</h1>
-            <h2>Instalaciones y Proyectos de Aire Acondicionado y Refrigeración</h2>
-          </div>
-          <div class="message">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non animi nobis distinctio, modi consequatur ut
-            voluptatem sequi. Molestias praesentium, voluptatem ea eos placeat nostrum exercitationem nihil cumque
-            commodi
-            quo! Error.
-            Soluta laborum labore fuga quisquam quasi necessitatibus omnis repellat, quis mollitia illum provident
-            perspiciatis commodi nemo! Neque modi itaque dicta est perferendis sequi eaque porro asperiores? Minus
-            dignissimos ab dolorum.
-            Quis commodi rem a accusantium minima? Et, dolores nisi. Provident, fugiat laboriosam. Hic reprehenderit
-            beatae optio omnis, distinctio architecto exercitationem quae pariatur ad provident quaerat, similique ipsa
-            ipsam. Placeat, nobis?
-          </div>
-        </div>
-      </div>
-      <div class="row section">
-        <div class="background">
-          <img src="./img/fondo-refrigeracion3.jpeg" alt="" loading="lazy">
-        </div>
-        <div class="content">
-          <div class="title">
-            <h1>INPROAIRES</h1>
-            <h2>Instalaciones y Proyectos de Aire Acondicionado y Refrigeración</h2>
-          </div>
-          <div class="message">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non animi nobis distinctio, modi consequatur ut
-            voluptatem sequi. Molestias praesentium, voluptatem ea eos placeat nostrum exercitationem nihil cumque
-            commodi
-            quo! Error.
-            Soluta laborum labore fuga quisquam quasi necessitatibus omnis repellat, quis mollitia illum provident
-            perspiciatis commodi nemo! Neque modi itaque dicta est perferendis sequi eaque porro asperiores? Minus
-            dignissimos ab dolorum.
-            Quis commodi rem a accusantium minima? Et, dolores nisi. Provident, fugiat laboriosam. Hic reprehenderit
-            beatae optio omnis, distinctio architecto exercitationem quae pariatur ad provident quaerat, similique ipsa
-            ipsam. Placeat, nobis?
-          </div>
-        </div>
-      </div>
-      <div class="row section">
-        <div class="background">
-          <img src="https://www.esan.edu.pe/images/blog/2019/02/28/1500x844-winwin-clientes-proveedor.jpg" alt="">
-        </div>
-        <div class="content">
-          <div class="title">
-            <h2>
-              NUESTROS CLIENTES
-            </h2>
-          </div>
-          .
-        </div>
-      </div>
+      
     </div>
     <div class="row footer">
       <div class="col-3">
