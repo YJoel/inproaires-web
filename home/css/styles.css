@@ -111,8 +111,8 @@
   letter-spacing: 8px;
 }
 
-.row.section:hover > .content > .title > hr {
-  border: 4px solid var(--azul-claro);
+.row.section > .content > .message > .f-lighter {
+  font-weight: normal;
 }
 
 .row.section > .content > .message > .clearfix {
@@ -128,7 +128,12 @@
 }
 
 .row.section > .content > .message > .clearfix > img {
+  position: relative;
+  width: 20%;
   padding: 0 15px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  /* animation-timing-function: linear; */
 }
 
 .row.section > .content > .message > .clearfix:nth-child(odd) > img {
@@ -147,16 +152,10 @@
   animation-range: entry 0% cover 50%;
 }
 
-.row.section > .content > .message > .clearfix > img {
-  position: relative;
-  width: 20%;
-  /* animation-timing-function: linear; */
-}
-
 @keyframes fadeInImage {
   from {
     opacity: 0;
-    scale: 0.7;
+    scale: 0.5;
     /* transform: translateY(100px); */
   }
 
@@ -167,8 +166,22 @@
   }
 }
 
-.row.section:hover > .background {
+.row.section:not(.no-filter):hover > .background {
   filter: brightness(0.5);
+}
+
+.background.gradient {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 30%,
+    var(--azul-claro)
+  );
+  mask-image: linear-gradient(to right, transparent 30%, var(--azul-claro));
+  /* background: linear-gradient(to right, transparent 70%, var(--azul-claro)); */
+}
+
+.row.section > .content > .row > .col-4 > img {
+  width: 100%;
 }
 
 .row.section > .content > .row.clientes {
@@ -201,7 +214,7 @@
   box-shadow: 0 0 20px white;
 }
 
-.row > .content {
+.row.section > .content {
   position: relative;
   margin: auto;
   width: 90%;
@@ -213,9 +226,85 @@
   text-align: center;
 }
 
-.row > .content .title,
-.row > .content .message {
+.row.section > .content .title,
+.row.section > .content .message {
   color: white;
+}
+
+.animated-text span:nth-child(odd) {
+  animation-name: slideInOdd;
+  animation-delay: 0s;
+}
+
+.animated-text span:nth-child(even) {
+  animation-name: slideInEven;
+  animation-delay: 0s;
+}
+
+.row.section > .content > .puntos {
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.row.section > .content > .puntos * {
+  color: white;
+}
+
+.row.section > .content > .puntos > .punto {
+  /* width: auto; */
+  position: relative;
+  min-width: 10%;
+  max-width: 20%;
+  margin: 10px;
+  padding: 15px;
+  aspect-ratio: 16/9;
+  border: 1px solid white;
+  vertical-align: middle;
+  text-shadow: 0 2px 2px black, 2px 0 2px black;
+  transition: border-radius 0.3s ease-in, color 0.3s ease-in,
+    background-color 0.3s ease-in, text-shadow 0.3s ease-in,
+    box-shadow 0.1s linear;
+}
+
+.row.section > .content > .puntos > .punto > .snow {
+  /* overflow: hidden; */
+  position: relative;
+  background-color: transparent;
+  width: 100%;
+  /* height: 100%; */
+  aspect-ratio: 16/3;
+  /* float: left; */
+  transition: transform 1s ease-in-out;
+}
+
+.row.section > .content > .puntos > .punto > .snow > svg {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  /* aspect-ratio: 1/1; */
+  /* margin: auto; */
+  transition: scale 0.5s ease-out;
+  /* top: 50%; */
+  /* transform: translateY(-5%); */
+}
+
+.row.section > .content:hover > .puntos > .punto {
+  /* background-color: #14b5d9d0; */
+  color: white;
+  border-radius: 20px;
+  text-shadow: 0 0 0 transparent;
+}
+
+.row.section > .content:hover > .puntos > .punto:hover {
+  box-shadow: 0 0 20px white;
+}
+
+.row.section > .content:hover > .puntos > .punto:hover > .snow {
+  transform: rotate(360deg);
 }
 
 .whatsapp {
@@ -341,4 +430,8 @@
 .row.footer > .col-3 a {
   /* text-decoration: none; */
   color: white;
+}
+
+audio {
+  display: none;
 }
