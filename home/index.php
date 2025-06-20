@@ -13,7 +13,7 @@
 
 <body>
   <div class="container-fluid">
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg sticky-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
           <img src="./img/INPROAIRES_LOGO_5.png" alt="" loading="lazy" height="80px">
