@@ -30,9 +30,9 @@
             <li class="nav-item">
               <a class="nav-link" aria-current="page" href="?page=nosotros">Nosotros</a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a class="nav-link" aria-current="page" href="?page=ventilacion">Ventilacion</a>
-            </li>
+            </li> -->
             <li class="nav-item ">
               <a class="nav-link" aria-current="page" href="?page=aireacondicionado">Aire Acondicionado</a>
             </li>
@@ -50,7 +50,7 @@
       </div>
     </nav>
     <div class="row" id="content">
-      
+
     </div>
     <div class="row footer">
       <div class="col-3">
@@ -95,7 +95,9 @@
                 </div>
                 <div class="col">
                   <div class="row">
-                    <b>Teléfono:</b>
+                    <div class="col">
+                      <b>Teléfono:</b>
+                    </div>
                   </div>
                   <div class="row">
                     <div class="col">
@@ -183,7 +185,7 @@
         <div class="row p-4">
           <div class="col">
             <h5>
-              Visíta Nuestras instalaciones
+              Visita Nuestras instalaciones
             </h5>
           </div>
         </div>
