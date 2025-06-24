@@ -34,6 +34,12 @@ document.forms["form-proyectos"].addEventListener("submit", async (ev) => {
   });
 
   const data = await response.json();
+  if (!data.error) {
+    alert("PROYECTO INGRESADO");
+  } else {
+    alert("NO SE PUDO INGRESAR EL PROYECTO, INTENTE NUEVAMENTE");
+  }
+  form.reset();
   console.log(data);
 });
 
