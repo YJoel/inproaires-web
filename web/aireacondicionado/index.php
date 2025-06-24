@@ -2,13 +2,13 @@
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>INPROAIRES</title>
-  <link rel="shortcut icon" href="http://localhost:3000/web/img/elice_inproaires_5.png" type="image/x-icon">
+  <link rel="shortcut icon" href="http://localhost:3000/web/img/elice_inproaires_5.png" type="image/x-icon" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
-  <link rel="stylesheet" href="http://localhost:3000/web/css/styles.css">
+    integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous" />
+  <link rel="stylesheet" href="http://localhost:3000/web/css/styles.css" />
 </head>
 
 <body>
@@ -16,7 +16,7 @@
     <nav class="navbar navbar-expand-lg sticky-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
-          <img src="./img/INPROAIRES_LOGO_5.png" alt="" loading="lazy" height="80px">
+          <img src="./../img/INPROAIRES_LOGO_5.png" alt="" loading="lazy" height="80px" />
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,26 +24,26 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item active">
-              <a class="nav-link" aria-current="page" href="">Inicio</a>
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="./../">Inicio</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="./nosotros/">Nosotros</a>
+              <a class="nav-link" aria-current="page" href="./../nosotros/">Nosotros</a>
             </li>
             <!-- <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="./web/ventilacion/">Ventilacion</a>
+              <a class="nav-link" aria-current="page" href="./../ventilacion/">Ventilacion</a>
             </li> -->
-            <li class="nav-item ">
-              <a class="nav-link" aria-current="page" href="./aireacondicionado/">Aire Acondicionado</a>
+            <li class="nav-item active">
+              <a class="nav-link" aria-current="page" href="./../aireacondicionado/">Aire Acondicionado</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="./servicios/">Servicios</a>
+              <a class="nav-link" aria-current="page" href="./../servicios/">Servicios</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="./proyectos/">Proyectos</a>
+              <a class="nav-link" aria-current="page" href="./../proyectos/">Proyectos</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="./contactanos/">Contactanos</a>
+              <a class="nav-link" aria-current="page" href="./../contactanos/">Contactanos</a>
             </li>
           </ul>
         </div>
@@ -52,95 +52,81 @@
     <div class="row" id="content">
       <div class="row section">
         <div class="background">
-          <img src="./img/fondo-refrigeracion2.png" alt="" loading="lazy" />
+          <img src="./../img/aireacondicionado_background.jpg" alt="" />
         </div>
         <div class="content">
           <div class="title">
-            <h1>TU ALIADO EN INGENIERIA EN</h1>
-            <h1 class="caption">CLIMATIZACION</h1>
+            <h1 class="caption">AIRE ACONDICIONADO</h1>
           </div>
-          <div class="message"></div>
-        </div>
-      </div>
-      <div class="row section">
-        <div class="background">
-          <img src="./img/fondo-refrigeracion3.jpeg" alt="" loading="lazy" />
-        </div>
-        <div class="content">
-          <div class="title">
-            <h1>SOLUCIONES INTERALES PARA</h1>
-            <h1 class="caption">HOGARES Y EMPRESAS</h1>
-          </div>
-          <div class="message"></div>
-        </div>
-      </div>
-      <div class="row section">
-        <div class="background">
-          <img src="./img/inproaires_ev_1.jpg" alt="" />
-        </div>
-        <div class="content animation">
-          <div class="title">
-            <h1>QUIÉNES SOMOS</h1>
-            <hr />
-          </div>
-          <div class="message p-2">
-            <div class="clearfix">
-              <img src="./img/inproaires_ev_1.jpg" class="float left" alt="" />
-              <p class="text-start fs-5">
-                Somos una empresa con experiencia en el sector de Aire Acondicionado,
-                estamos comprometidos con el medio ambiente, el ahorro energético y la
-                eficiencia. Especialistas en Aires Acondicionados, venta, instalación,
-                diseño de sistemas de aire acondicionado; mantenimiento preventivo,
-                correctivo y predictivo. Brindamos asesoría profesional y
-                personalizada, nuestro equipo de trabajo esta integrado por excelentes
-                personas y profesionales íntegros, logrando así la ejecución exitosa
-                de nuevos proyectos y la fidelidad de nuestros clientes en Colombia.
-              </p>
-              <hr />
-            </div>
-
-            <div class="clearfix">
-              <img src="./img/inproaires_ev_2.jpg" class="float right" alt="" />
-              <p class="text-start fs-5">
-                En INPROAIRES SAS, te ofrecemos un servicio integral, desde el diseño
-                hasta el mantenimiento de tu sistema de aire acondicionado. Cada
-                solución está adaptada a tus necesidades, asegurando eficiencia y
-                confort en cada espacio. En InproAires nos especializamos en la
-                instalación, mantenimiento y reparación de aire acondicionado,
-                asegurando ambientes frescos y cómodos para ti y tu familia.
-              </p>
-              <hr />
-            </div>
+          <div class="message">
+            <h3 class="f-lighter">
+              En INPROAIRES S.A.S., ofrecemos un portafolio robusto de
+              servicios especializados para todos los segmentos del mercado
+              HVAC, adaptándonos a las particularidades de cada tipo de
+              sistema
+            </h3>
           </div>
         </div>
       </div>
       <div class="row section">
         <div class="background">
-          <img src="https://www.esan.edu.pe/images/blog/2019/02/28/1500x844-winwin-clientes-proveedor.jpg" alt="" />
+          <img src="./../img/aireacondicionado_residencial.avif" alt="" />
         </div>
         <div class="content">
           <div class="title">
-            <h2>ALGUNOS DE NUESTRO CLIENTES</h2>
+            <h2>AIRE ACONDICIONADO RESIDENCIAL</h2>
+            <h3>
+              Diseño e instalación personalizada para hogares, apartamentos y
+              espacios pequeños
+            </h3>
           </div>
-          <div class="row clientes">
-            <div class="cliente">
-              <img src="./img/decameron.png" alt="" />
-            </div>
-            <div class="cliente">
-              <img src="./img/onvacation.png" alt="" />
-            </div>
-            <div class="cliente">
-              <img src="./img/dutyfreeamericas.png" alt="" />
-            </div>
-            <div class="cliente">
-              <img src="./img/nattivocollectionhotel.webp" alt="" />
-            </div>
-            <div class="cliente" style="background-color: #ff0045">
-              <img src="./img/miscelandia.jpeg" alt="" />
-            </div>
-            <div class="cliente">
-              <img src="./img/infotep.jpg" alt="" />
-            </div>
+          <div class="message">
+            Equipos tipo mini-split, portátiles o de ventana, con enfoque en
+            eficiencia energética y bajo nivel de ruido. Ofrecemos servicios
+            de mantenimiento preventivo para garantizar comodidad y aire
+            limpio en el hogar. Además, brindamos asesoría técnica en la
+            selección del equipo según la zona climática y hábitos de uso.
+          </div>
+        </div>
+      </div>
+      <div class="row section">
+        <div class="background">
+          <img src="./../img/aireacondicionado_comercial.avif" alt="" />
+        </div>
+        <div class="content">
+          <div class="title">
+            <h2>AIRE ACONDICIONADO COMERCIAL</h2>
+            <h3>
+              Soluciones para oficinas, locales comerciales, restaurantes y
+              espacios públicos con alta circulación
+            </h3>
+          </div>
+          <div class="message">
+            Instalación de sistemas tipo cassette, piso-techo o VRF, adaptados
+            al diseño arquitectónico. Mantenimiento y reparaciones rápidas que
+            evitan interrupciones operativas. Suministro de equipos y
+            repuestos con asesoría en expansión o redistribución del sistema.
+          </div>
+        </div>
+      </div>
+      <div class="row section">
+        <div class="background">
+          <img src="./../img/aireacondicionado_industrial2.png" alt="" />
+        </div>
+        <div class="content">
+          <div class="title">
+            <h2>AIRE ACONDIONADO INDUSTRIAL</h2>
+            <h3>
+              Especialistas en ambientes exigentes como plantas de producción,
+              centros de datos, laboratorios o almacenamiento de precisión
+            </h3>
+          </div>
+          <div class="message">
+            Instalación de sistemas robustos de ductería, chiller, rooftop u
+            otros de alta capacidad. Protocolos técnicos de mantenimiento
+            correctivo y predictivo, alineados con normas de seguridad
+            industrial. Ingeniería aplicada y asesoría técnica para optimizar
+            el rendimiento térmico en procesos críticos.
           </div>
         </div>
       </div>
@@ -149,9 +135,7 @@
       <div class="col-3">
         <div class="row p-4">
           <div class="col">
-            <h5>
-              Contactanos
-            </h5>
+            <h5>Contactanos</h5>
           </div>
           <div class="row">
             <div class="row">
@@ -176,7 +160,7 @@
                 </div>
               </div>
             </div>
-            <hr class="mt-3 mb-3">
+            <hr class="mt-3 mb-3" />
             <div class="row">
               <div class="row">
                 <div class="col-2">
@@ -200,7 +184,7 @@
                 </div>
               </div>
             </div>
-            <hr class="mt-3 mb-3">
+            <hr class="mt-3 mb-3" />
             <div class="row">
               <div class="row">
                 <div class="col-2">
@@ -226,14 +210,11 @@
             </div>
           </div>
         </div>
-
       </div>
       <div class="col-3">
         <div class="row p-4">
           <div class="col">
-            <h5>
-              Escríbenos
-            </h5>
+            <h5>Escríbenos</h5>
           </div>
         </div>
         <div class="whatsapp">
@@ -241,17 +222,18 @@
             <div class="row mb-2 mt-2">
               <div class="col-6">
                 <label for="" class="form-label">Nombre</label>
-                <input type="text" class="form-control" required name="nombre" id="" placeholder="">
+                <input type="text" class="form-control" required name="nombre" id="" placeholder="" />
               </div>
               <div class="col-6">
                 <label for="" class="form-label">Apellido</label>
-                <input type="text" class="form-control" required name="apellido" id="" placeholder="">
+                <input type="text" class="form-control" required name="apellido" id="" placeholder="" />
               </div>
             </div>
             <div class="row mb-2 mt-2">
               <div class="col">
                 <label for="" class="form-label">Dejanos tu mensaje</label>
-                <textarea required name="mensaje" id="" class="form-control" placeholder="">Hola, estoy interesado en sus servicios
+                <textarea required name="mensaje" id="" class="form-control" placeholder="">
+Hola, estoy interesado en sus servicios
                 </textarea>
               </div>
             </div>
@@ -269,45 +251,40 @@
               </div>
             </div>
           </form>
-          <div class="bg">
-
-          </div>
+          <div class="bg"></div>
         </div>
       </div>
       <div class="col-3">
         <div class="row p-4">
           <div class="col">
-            <h5>
-              Visita Nuestras instalaciones
-            </h5>
+            <h5>Visita Nuestras instalaciones</h5>
           </div>
         </div>
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d611.8738804118848!2d-81.71086091648051!3d12.58287886287043!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8f05a5e04fa6ea49%3A0x347fd0548c33855e!2sCra.%2013%20%2318%2043%2C%20Br.%20Natania%2C%20San%20Andr%C3%A9s%2C%20San%20Andr%C3%A9s%20y%20Providencia!5e1!3m2!1ses-419!2sco!4v1749091945647!5m2!1ses-419!2sco"
-          style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          style="border: 0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
       <div class="bottom-content"></div>
       <div class="background">
-        <img src="./img/INPROAIRES_LOGO_25.png" alt="" loading="lazy">
+        <img src="./../img/INPROAIRES_LOGO_25.png" alt="" loading="lazy" />
       </div>
     </div>
     <div class="redes-sociales left">
       <div class="item">
         <a href="https://www.facebook.com/profile.php?id=61550635768783" target="_blank">
-          <img src="./img/facebook-icon.png" alt="" loading="lazy">
+          <img src="./../img/facebook-icon.png" alt="" loading="lazy" />
         </a>
       </div>
       <div class="item">
         <a href="https://www.instagram.com/inproaires/" target="_blank">
-          <img src="./img/instagram-icon.png" alt="" loading="lazy">
+          <img src="./../img/instagram-icon.png" alt="" loading="lazy" />
         </a>
-        </di>
       </div>
     </div>
     <div class="redes-sociales right">
       <div class="item">
         <a href="https://wa.me/573218051386" target="_blank">
-          <img src="./img/whatsapp-icon.png" alt="">
+          <img src="./../img/whatsapp-icon.png" alt="" />
         </a>
       </div>
     </div>
@@ -319,7 +296,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.min.js"
     integrity="sha384-RuyvpeZCxMJCqVUGFI0Do1mQrods/hhxYlcVfGPOfQtPJh0JCw12tUAZ/Mv10S7D"
     crossorigin="anonymous"></script>
-  <script src="index.js"></script>
+  <script src="./../index.js"></script>
 </body>
 
 </html>
