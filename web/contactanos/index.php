@@ -9,6 +9,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous" />
   <link rel="stylesheet" href="http://localhost:3000/web/css/styles.css" />
+  <meta name="description"
+    content="¿Necesitas una solución en aire acondicionado? Escríbenos y recibe atención técnica especializada para tu hogar, oficina o empresa.">
 </head>
 
 <body>
@@ -297,7 +299,7 @@ Hola, estoy interesado en sus servicios
       </div>
     </div>
   </div>
-  
+
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
     integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
     crossorigin="anonymous"></script>
