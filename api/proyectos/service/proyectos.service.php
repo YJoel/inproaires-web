@@ -80,4 +80,9 @@ class ProyectosService
       "message" => "registro insertado con éxito"
     ]);
   }
+
+  public function update($id, $proyecto)
+  {
+    return;
+  }
 }

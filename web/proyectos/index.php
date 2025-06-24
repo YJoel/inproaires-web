@@ -228,6 +228,9 @@ Hola, estoy interesado en sus servicios
     integrity="sha384-RuyvpeZCxMJCqVUGFI0Do1mQrods/hhxYlcVfGPOfQtPJh0JCw12tUAZ/Mv10S7D"
     crossorigin="anonymous"></script>
   <script src="./../index.js"></script>
+  <script src="./functions/proyectos.js"></script>
+  <script src="./layout-section/section.js"></script>
+  <script src="./index.js"></script>
 </body>
 
 </html>

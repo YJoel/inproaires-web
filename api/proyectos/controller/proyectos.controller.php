@@ -25,4 +25,8 @@ class ProyectosController
   public function insert($proyecto) {
     return $this->proyectosService->insert($proyecto);
   }
+
+  public function update($id, $proyecto) {
+    return $this->proyectosService->update($id, $proyecto);
+  }
 }

@@ -18,6 +18,13 @@ switch ($_SERVER["REQUEST_METHOD"]) {
     $proyectoArray = json_decode($data, true);
     $proyectoArray["b64Images"] = json_encode($proyectoArray["b64Images"]);
     $proyecto = new ProyectosDto($proyectoArray);
-
     echo $proyectosController->insert($proyecto);
+    break;
+  case "PUT":
+    $data = file_get_contents("php://input");
+    $proyectoArray = json_decode($data, true);
+    $id = $proyectoArray["id"];
+    $proyecto = new ProyectosDto($proyectoArray["proyecto"]);
+    echo $proyectosController->update($id, $proyecto);
+    break;
 }
