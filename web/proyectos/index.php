@@ -54,13 +54,26 @@
     <div class="row" id="content">
       <div class="row section">
         <div class="background">
-          <img src="./../img/fondo_tuberias_ventilacion.jpg" alt="" />
+          <img src="./../img/fondo_tuberias_ventilacion.jpg" alt="" id="background1"/>
         </div>
         <div class="content">
           <div class="title">
             <h1 class="caption">PROYECTOS</h1>
           </div>
-          <div class="message"></div>
+          <div class="message">
+            INSTALACIÓN DE EQUIPOS VRF EN CONVENCIONES
+          </div>
+          <div class="puntos">
+            <div class="punto">
+              <img src="./../img/aireacondicionado_background.jpg" alt="" onmouseover="changeImage('background1', this)">
+            </div>
+            <div class="punto">
+              <img src="./../img/aireacondicionado_comercial.avif" alt="" onmouseover="changeImage('background1', this)">
+            </div>
+            <div class="punto">
+              <img src="./../img/aireacondicionado_industrial2.png" alt="" onmouseover="changeImage('background1', this)">
+            </div>
+          </div>
         </div>
       </div>
     </div>

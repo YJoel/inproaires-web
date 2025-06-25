@@ -1,10 +1,17 @@
-function section(backgroundImg = "", title = "", descripcion = "") {
-  console.log(title, descripcion);
+function section(id = 0, backgroundImg = [], title = "", descripcion = "") {
+  // console.log(title, descripcion);
+  let puntosHTML = "";
+  backgroundImg.forEach((img, i) => {
+    puntosHTML += `
+    <div class="punto">
+      <img src="${img}" onmouseover="changeImage('background${id}', this)"/>
+    </div>`;
+  });
   if (backgroundImg != "" && title != "" && descripcion != "") {
     return `
       <div class="row section">
         <div class="background">
-          <img src="${backgroundImg}" alt="" loading="laxy" />
+          <img src="${backgroundImg[0]}" alt="" loading="lazy" id="background${id}"/>
         </div>
         <div class="content">
           <div class="title">
@@ -12,6 +19,9 @@ function section(backgroundImg = "", title = "", descripcion = "") {
           </div>
           <div class="message">
             ${descripcion}
+          </div>
+          <div class="puntos">
+            ${puntosHTML}
           </div>
         </div>
       </div>

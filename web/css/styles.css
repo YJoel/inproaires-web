@@ -297,6 +297,13 @@ nav {
   /* transform: translateY(-5%); */
 }
 
+.row.section > .content > .puntos > .punto > img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .row.section > .content:hover > .puntos > .punto {
   /* background-color: #14b5d9d0; */
   color: white;

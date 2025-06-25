@@ -7,9 +7,14 @@ async function loadSections() {
   proyectos.forEach((proyecto) => {
     proyecto.b64Images = JSON.parse(proyecto.b64Images);
     contentPage.innerHTML += section(
-      proyecto.b64Images[0],
+      proyecto.id,
+      proyecto.b64Images,
       proyecto.titulo,
       proyecto.descripcion
     );
   });
+}
+
+function changeImage(id, img) {
+  document.getElementById(id).src = img.src;
 }
