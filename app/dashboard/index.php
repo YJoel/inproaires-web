@@ -15,6 +15,8 @@
     href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
     rel="stylesheet" />
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-2.min.css" rel="stylesheet" />
 </head>
@@ -340,7 +342,11 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
           <!-- Page Heading -->
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verProyectos">
+            <i class="bi bi-stack"></i>
+            VER PROYECTOS
+          </button>
+          <div class="d-sm-flex align-items-center justify-content-around mb-4">
             <h1 class="h3 mb-0 text-gray-800">Subir Proyectos</h1>
           </div>
 
@@ -348,6 +354,7 @@
           <div class="container-fluid">
             <div class="row">
               <div class="col">
+
                 <form name="form-proyectos">
                   <div class="row">
                     <div class="col">
@@ -359,10 +366,16 @@
                       <textarea name="descripcion" id="descripcion" class="form-control" rows="5"></textarea>
                     </div>
                   </div>
-                  <div class="row">
+                  <div class="row pt-2">
+                    <div class="col">
+                      <label for="file" class="form-label">Imagen de Fondo</label>
+                      <input type="file" name="backgroundImg" id="backgroundImg" class="form-control"
+                        accept="image/*" />
+                    </div>
                     <div class="col">
                       <label for="file" class="form-label">Evidencias</label>
-                      <input type="file" name="file" id="file" multiple class="form-control" accept="image/*" />
+                      <input type="file" name="evidences" id="evidences" multiple class="form-control"
+                        accept="image/*" />
                     </div>
                   </div>
                   <div class="row py-3">
@@ -371,6 +384,7 @@
                     </div>
                   </div>
                 </form>
+
               </div>
             </div>
 
@@ -427,6 +441,67 @@
       </div>
     </div>
   </div>
+
+  <!-- MODAL - VER PROYECTOS -->
+  <div class="modal fade" id="verProyectos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-4" id="exampleModalLabel">Proyectos Subidos</h1>
+          <button type="button" class="btn btn-primary p-1 mx-2" onclick="proyectosToHTML()">Sincronizar <i
+              class="bi bi-arrow-repeat"></i></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="editarProyecto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Proyecto</h1>
+          <button type="button" class="btn-close" data-bs-toggle="modal" data-bs-target="#verProyectos"></button>
+        </div>
+        <div class="modal-body">
+          <form name="editarProyecto">
+            <div class="row">
+              <div class="col">
+                <label for="titulo" class="form-label">Titulo</label>
+                <input type="text" name="titulo" id="titulo" class="form-control">
+              </div>
+              <div class="col">
+                <label for="descripcion" class="form-label">Descripcion</label>
+                <textarea name="descripcion" id="descripcion" class="form-control" rows="5"></textarea>
+              </div>
+            </div>
+            <div class="row pt-2">
+              <div class="col">
+                <label for="file" class="form-label">Imagen de Fondo</label>
+                <input type="file" name="backgroundImg" id="backgroundImg" class="form-control" accept="image/*" />
+              </div>
+              <div class="col">
+                <label for="file" class="form-label">Evidencias</label>
+                <input type="file" name="evidences" id="evidences" multiple class="form-control" accept="image/*" />
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+            data-bs-target="#verProyectos">Cancelar</button>
+          <button type="button" class="btn btn-primary">Subir Cambios</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
     integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
     crossorigin="anonymous"></script>
@@ -449,6 +524,8 @@
   <!-- Page level custom scripts -->
   <script src="js/demo/chart-area-demo.js"></script>
   <script src="js/demo/chart-pie-demo.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
+  <script src="proyectos.js"></script>
   <script src="index.js"></script>
 </body>
 

@@ -1,39 +1,59 @@
-const apiUrl = "http://localhost:3000/api/proyectos/";
+// const apiUrl = "http://localhost:3000/api/proyectos/";
 
 document.forms["form-proyectos"].addEventListener("submit", async (ev) => {
   ev.preventDefault();
   const form = ev.target;
   const titulo = form["titulo"].value;
   const descripcion = form["descripcion"].value;
-  const imgs = form["file"].files;
+  const backgroundImg = form["backgroundImg"].files;
+  const imgs = form["evidences"].files;
+  console.log(backgroundImg);
+  console.log(imgs);
   const date = new Date();
   const fecha = `${date.getFullYear()}-${
     date.getMonth() + 1
   }-${date.getDate()}T${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}-05:00`;
 
   const b64Images = [];
-  for (let index = 0; index < imgs.length; index++) {
-    b64Images[index] = await comprimirImagen(imgs[index]);
+  // for (let index = 0; index < imgs.length + 1; index++) {
+  //   if (index == 0) {
+  //     console.log(backgroundImg[index]);
+  //   }
+  //   console.log(imgs[index]);
+  // }
+  for (let index = 0; index < imgs.length + 1; index++) {
+    console.log(index);
+    if (index == 0) {
+      b64Images[index] = await comprimirImagen(backgroundImg[index]);
+    } else {
+      b64Images[index] = await comprimirImagen(imgs[index - 1]);
+    }
   }
 
   // const response = await fetch(apiUrl, {
   //   method: "GET",
   // });
 
-  const response = await fetch(apiUrl, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      titulo: titulo,
-      descripcion: descripcion,
-      b64Images: b64Images,
-      fecha: fecha,
-    }),
+  // const response = await fetch(apiUrl, {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  //   body: JSON.stringify({
+  //     titulo: titulo,
+  //     descripcion: descripcion,
+  //     b64Images: b64Images,
+  //     fecha: fecha,
+  //   }),
+  // });
+
+  const data = await insert({
+    titulo: titulo,
+    descripcion: descripcion,
+    b64Images: b64Images,
+    fecha: fecha,
   });
 
-  const data = await response.json();
   if (!data.error) {
     alert("PROYECTO INGRESADO");
   } else {
@@ -42,32 +62,6 @@ document.forms["form-proyectos"].addEventListener("submit", async (ev) => {
   form.reset();
   console.log(data);
 });
-
-document.forms["form-proyectos"]["file"].addEventListener(
-  "change",
-  async (ev) => {
-    // console.log(ev.target.files);
-    // const file = ev.target.files[0];
-    // const imgEl = document.getElementById("upload-image");
-    // try {
-    //   const base64Comprimido = await comprimirImagen(file);
-    //   console.log("📦 Imagen comprimida y codificada:", base64Comprimido);
-    //   // Aquí podrías mostrar una vista previa o enviarla al servidor
-    //   const preview = new Image();
-    //   preview.src = base64Comprimido;
-    //   document.body.appendChild(preview);
-    // } catch (err) {
-    //   alert("Hubo un problema al procesar la imagen.");
-    //   console.error(err);
-    // }
-    // const reader = new FileReader();
-    // reader.onloadend = function () {
-    //   const base64String = reader.result;
-    //   console.log(base64String); // Aquí tienes el string en Base64
-    // };
-    // reader.readAsDataURL(file);
-  }
-);
 
 function comprimirImagen(file, maxWidth = 1920, calidad = 0.7) {
   return new Promise((resolve, reject) => {
@@ -103,4 +97,73 @@ function comprimirImagen(file, maxWidth = 1920, calidad = 0.7) {
     reader.onerror = reject;
     reader.readAsDataURL(file);
   });
+}
+
+async function proyectosToHTML() {
+  let proyectos = await getAll();
+  console.log(proyectos);
+  const table = document.createElement("table");
+  table.classList.add("table", "table-hover");
+  table.innerHTML = `
+    <tr>
+      <th>ID</th>
+      <th>Titulo</th>
+      <th>Descripcion</th>
+      <th>Imagen de Fondo</th>
+      <th>Evidencias</th>
+      <th>Acciones</th>
+    </tr>
+  `;
+  proyectos.forEach((proyecto) => {
+    proyecto.b64Images = JSON.parse(proyecto.b64Images);
+    let imgs = ``;
+    proyecto.b64Images.forEach((img, i) => {
+      if (i != 0) {
+        imgs += `<img src="${img}" width="100px" class="d-inline-block py-1" />`;
+      }
+    });
+    table.innerHTML += `
+    <tr>
+      <td>
+        ${proyecto.id}
+      </td>
+      <td>
+        ${proyecto.titulo}
+      </td>
+      <td>
+        ${proyecto.descripcion}
+      </td>
+      <td>
+        <img src="${proyecto.b64Images[0]}" width="120px" style="display: block" />
+      </td>
+      <td>
+        ${imgs}
+      </td>
+      <td>
+        <button type="button" class="btn btn-success d-inline-block p-1" onclick="dataToFormHTML(${proyecto.id})">
+          <i class="bi bi-pencil-square" data-bs-toggle="modal" data-bs-target="#editarProyecto"></i>
+        </button>
+        <button type="button" class="btn btn-danger d-inline-block p-1">
+          <i class="bi bi-trash"></i>
+        </button>
+      </td>
+    </tr>
+    `;
+  });
+
+  document.querySelector("#verProyectos .modal-body").innerHTML = "";
+  document.querySelector("#verProyectos .modal-body").append(table);
+
+  // localStorage.setItem(
+  //   "proyectos",
+  //   LZString.compress(JSON.stringify(proyectos))
+  // );
+}
+
+async function dataToFormHTML(id) {
+  const proyecto = await getById(id);
+  const form = document.forms["editarProyecto"];
+  form["titulo"].value = proyecto[0].titulo;
+  form["descripcion"].value = proyecto[0].descripcion;
+  console.log(proyecto[0]);
 }

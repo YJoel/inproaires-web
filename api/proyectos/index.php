@@ -8,7 +8,7 @@ $proyectosController = new ProyectosController();
 switch ($_SERVER["REQUEST_METHOD"]) {
   case "GET":
     if (isset($_GET["id"])) {
-      echo $miembrosController->getById($_GET["id"]);
+      echo $proyectosController->getById($_GET["id"]);
     } else {
       echo $proyectosController->getAll();
     }

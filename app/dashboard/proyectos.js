@@ -22,7 +22,9 @@ async function getById(id) {
 async function insert(proyecto) {
   const response = await fetch(apiUrl, {
     method: "POST",
-    headers: "Content-Type: application/json",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(proyecto),
   });
 
@@ -32,7 +34,9 @@ async function insert(proyecto) {
 async function update(proyecto) {
   const response = await fetch(apiUrl, {
     method: "PUT",
-    headers: "Content-Type: application/json",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(proyecto),
   });
 }

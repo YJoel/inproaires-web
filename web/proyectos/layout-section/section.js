@@ -2,12 +2,14 @@ function section(id = 0, backgroundImg = [], title = "", descripcion = "") {
   // console.log(title, descripcion);
   let puntosHTML = "";
   backgroundImg.forEach((img, i) => {
-    puntosHTML += `
+    if (i != 0) {
+      puntosHTML += `
     <div class="punto">
-      <img src="${img}" onmouseover="changeImage('background${id}', this)"/>
+      <img src="${img}" onmouseover="changeImage('background${id}', this)" onmouseout="restoreBackground('background${id}', '${backgroundImg[0]}')"/>
     </div>`;
+    }
   });
-  if (backgroundImg != "" && title != "" && descripcion != "") {
+  if (backgroundImg != "" || title != "" || descripcion != "") {
     return `
       <div class="row section">
         <div class="background">
