@@ -41,10 +41,17 @@ async function registrarHorasExtras(ev) {
   let hInicio = form["hInicio"].value;
   let hFin = form["hFin"].value;
   let turno = form["turnoTrabajo"].value;
+  let festivo = form["festivo"].checked;
   let turnoCopy = turno;
-  let extraDiurna = horasExtrasDiurnas(hInicio, hFin, turnoCopy);
-  let extraNocturna = horasExtrasNocturna(hInicio, hFin, turnoCopy);
   let diaSemana = new Date(form["fecha"].value).getDay();
+  let extraDiurna = horasExtrasDiurnas(
+    hInicio,
+    hFin,
+    turnoCopy,
+    diaSemana,
+    festivo
+  );
+  let extraNocturna = horasExtrasNocturna(hInicio, hFin, turnoCopy);
   let nHoras = extraDiurna + extraNocturna;
 
   let hextra = {
@@ -58,6 +65,7 @@ async function registrarHorasExtras(ev) {
     hInicio: hInicio,
     hFin: hFin,
     turno: turno,
+    festivo: festivo == true ? "SI" : "NO",
   };
 
   console.log(hextra);
@@ -71,6 +79,7 @@ async function registrarHorasExtras(ev) {
   }
 
   form.reset();
+  cargarFecha();
 }
 
 function restarHoras(horaInicio, horaFin) {
@@ -90,7 +99,7 @@ function restarHoras(horaInicio, horaFin) {
   return Math.round(resultado);
 }
 
-function horasExtrasDiurnas(horaInicio, horaFin, turno) {
+function horasExtrasDiurnas(horaInicio, horaFin, turno, diaSemana, festivo) {
   let resultado = 0;
   // console.log(jornada[turno], turno);
   let dif1 = restarHoras(jornada[turno].fin.join(":"), horaInicio);
@@ -98,15 +107,24 @@ function horasExtrasDiurnas(horaInicio, horaFin, turno) {
   let limInf = 0;
   let limSup = 0;
 
-  if (dif1 <= 0) {
-    limInf = jornada[turno].fin.join(":");
+  if (diaSemana != "Domingo" && !festivo) {
+    if (dif1 <= 0) {
+      limInf = jornada[turno].fin.join(":");
+    } else {
+      limInf = horaInicio;
+    }
+    if (dif2 >= 0) {
+      limSup = horaFin;
+    } else {
+      limSup = "19:00";
+    }
   } else {
     limInf = horaInicio;
-  }
-  if (dif2 >= 0) {
-    limSup = horaFin;
-  } else {
-    limSup = "19:00";
+    if (dif2 >= 0) {
+      limSup = horaFin;
+    } else {
+      limSup = "19:00";
+    }
   }
 
   resultado = restarHoras(limInf, limSup);

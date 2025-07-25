@@ -54,7 +54,18 @@
       </div>
       <div class="row">
         <div class="col">
-          <input type="date" name="fecha" id="fecha" class="form-control" required>
+          <div class="row">
+            <div class="col">
+              <input type="date" name="fecha" id="fecha" class="form-control" required>
+            </div>
+            <div class="col p-2">
+              <input class="form-check-input" type="checkbox" value="" id="festivo" name="festivo">
+              <label class="form-check-label" for="checkDefault">
+                Dia Festivo
+              </label>
+            </div>
+          </div>
+
         </div>
         <div class="col">
           <div class="input-group mb-3">

@@ -55,12 +55,12 @@ class HExtrasService
   {
     $stmt = $this->conn->prepare(
       "INSERT INTO $this->dbTable VALUES
-      (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+      (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
     );
 
     $int = 0;
     $stmt->bind_param(
-      "issisiisss",
+      "issisiissss",
       $hextra->cedula,
       $hextra->nombre,
       $hextra->fecha,
@@ -70,7 +70,8 @@ class HExtrasService
       $hextra->hDiurnas,
       $hextra->hInicio,
       $hextra->hFin,
-      $hextra->turno
+      $hextra->turno,
+      $hextra->festivo
     );
 
     if (!$stmt->execute()) {
