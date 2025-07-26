@@ -1,6 +1,6 @@
-.container-fluid{
+.container-fluid {
   position: relative;
-  height: 20vh;
+  /* height: 20vh; */
   background-color: lightblue;
 }
 
@@ -8,9 +8,10 @@ img {
   position: relative;
   aspect-ratio: 16/9;
   object-fit: contain;
-  height: 100%;
+  width: 13rem;
+  vertical-align: middle;
 }
 
-button[name="registrar"]{
+button[name="registrar"] {
   width: 100%;
 }

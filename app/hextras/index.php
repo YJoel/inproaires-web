@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registrar Horas Extras</title>
+  <link rel="shortcut icon" href="./../../web/img/elice_inproaires_5.png" type="image/x-icon">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
@@ -13,7 +14,33 @@
 
 <body>
   <div class="container-fluid mb-3">
-    <img src="./../../web/img/INPROAIRES_LOGO_10.png" alt="">
+    <div class="row d-flex justify-content-center align-items-center">
+      <div class="col"><img src="./../../web/img/INPROAIRES_LOGO_10.png" alt=""></div>
+      <div class="col-2 text-right">
+
+        <button class="btn border-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
+          aria-controls="offcanvasExample">
+          <i class="bi bi-list"></i>
+        </button>
+
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample"
+          aria-labelledby="offcanvasExampleLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasExampleLabel">Menu</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <hr>
+          <div class="offcanvas-body">
+            <div class="row">
+              <div class="col">
+                <a class="btn btn-success" href="./export/">Reporte de horas</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
   <div class="container">
     <h4>

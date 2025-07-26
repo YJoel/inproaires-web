@@ -5,28 +5,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Exportar Horas Extras</title>
+  <link rel="shortcut icon" href="./../../../web/img/elice_inproaires_5.png" type="image/x-icon">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-  <style>
-    .container-fluid {
-      position: relative;
-      height: 20vh;
-      background-color: lightblue;
-    }
-
-    img {
-      position: relative;
-      aspect-ratio: 16/9;
-      object-fit: contain;
-      height: 100%;
-    }
-  </style>
+  <link rel="stylesheet" href="./../css/styles.css">
 </head>
 
 <body>
   <div class="container-fluid mb-3">
-    <img src="./../../../web/img/INPROAIRES_LOGO_10.png" alt="">
+    <div class="row d-flex justify-content-center align-items-center">
+      <div class="col"><img src="./../../../web/img/INPROAIRES_LOGO_10.png" alt=""></div>
+      <div class="col-2 text-right">
+
+        <a class="btn btn-danger border-light" href="./../">
+          <i class="bi bi-caret-left-fill"></i>Regresar
+        </a>
+      </div>
+    </div>
+
   </div>
   <div class="container">
     <div class="row">
