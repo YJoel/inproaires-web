@@ -7,7 +7,7 @@ async function bajarReporte(ev) {
   let mes = form["mes"].value;
   const hExtras = await hExtra.getAll();
 
-  console.log(hExtras);
+  // console.log(hExtras);
   let filtroMes = hExtras.filter((el) => {
     return el.fecha.search(mes) != -1;
   });
