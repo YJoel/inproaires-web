@@ -42,7 +42,7 @@ const empleados = {
 
 if (dominio.search(location.hostname) >= 0) {
   /* FOR DEPLOY */
-  empleados.apiUrl = `https://inproaires.com/api/${empleados.apiName}/`;
+  empleados.apiUrl = `https://inproaires.com.co/api/${empleados.apiName}/`;
 } else {
   /* FOR DEVELOP */
   // apiUrl = `http://localhost:3000/api/${apiName}/`;

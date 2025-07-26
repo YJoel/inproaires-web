@@ -1,5 +1,8 @@
 <?php
 header("Content-Type: application/json");
+header("Access-Control-Allow-Origin: https://www.inproaires.com.co");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
 
 require_once "./controller/empleados.controller.php";
 require_once "./dto/empleados.dto.php";
