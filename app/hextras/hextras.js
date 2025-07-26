@@ -42,7 +42,7 @@ const hExtra = {
 
 if (dominio.search(location.hostname) >= 0) {
   /* FOR DEPLOY */
-  hExtra.apiUrl = `https://inproaires.com/api/${hExtra.apiName}/`;
+  hExtra.apiUrl = `https://inproaires.com.co/api/${hExtra.apiName}/`;
 } else {
   /* FOR DEVELOP */
   // apiUrl = `http://localhost:3000/api/${apiName}/`;
