@@ -20,9 +20,9 @@ const diasSemana = [
 ];
 
 async function buscarEmpleado() {
-  console.log(form["cedula"].value);
+  // console.log(form["cedula"].value);
   const empleado = await empleados.getById(form["cedula"].value);
-  console.log(empleado);
+  // console.log(empleado);
   form["nombre"].value = empleado[0].nombre;
 }
 
@@ -68,7 +68,7 @@ async function registrarHorasExtras(ev) {
     festivo: festivo == true ? "SI" : "NO",
   };
 
-  console.log(hextra);
+  // console.log(hextra);
   const result = await hExtra.insert(hextra);
   if (result.error == 0) {
     alert("Horas extras registradas con éxito");
@@ -139,7 +139,7 @@ function horasExtrasNocturna(horaInicio, horaFin, turno) {
   let limInf = 0;
   let limSup = 0;
 
-  console.log(dif1, dif2, limInf, limSup);
+  // console.log(dif1, dif2, limInf, limSup);
 
   if (dif1 < dif2) {
     if (dif1 <= 0) {
@@ -154,7 +154,7 @@ function horasExtrasNocturna(horaInicio, horaFin, turno) {
   } else {
     return 0;
   }
-  console.log(dif1, dif2, limInf, limSup);
+  // console.log(dif1, dif2, limInf, limSup);
 
   resultado = restarHoras(limInf, limSup);
 

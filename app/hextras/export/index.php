@@ -8,9 +8,49 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <style>
+    .container-fluid {
+      position: relative;
+      height: 20vh;
+      background-color: lightblue;
+    }
+
+    img {
+      position: relative;
+      aspect-ratio: 16/9;
+      object-fit: contain;
+      height: 100%;
+    }
+  </style>
 </head>
 
 <body>
+  <div class="container-fluid mb-3">
+    <img src="./../../../web/img/INPROAIRES_LOGO_10.png" alt="">
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <form name="reporte" class="mx-2 px-3 border border-info">
+          &nbsp;
+          <h3 class="text-center">
+            EXPORTAR HORAS EXTRAS POR MES
+          </h3>
+          <div class="row">
+            <div class="col">
+              <input type="month" name="mes" id="mes" class="form-control" required>
+            </div>
+            <div class="col">
+              <button type="submit" class="btn btn-primary">Generar reporte de Horas Extras</button>
+            </div>
+          </div>
+          &nbsp;
+          <!-- <hr> -->
+        </form>
+
+      </div>
+    </div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
     integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
