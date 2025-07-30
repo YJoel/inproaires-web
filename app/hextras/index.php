@@ -50,67 +50,73 @@
     <form name="registro-horas-extras">
       <div class="row">
         <div class="col-10">
-          <div class="form-floating mb-3">
-            <input type="number" class="form-control" id="cedula" name="cedula" placeholder="1234567890" required>
-            <label for="cedula">Cedula</label>
-          </div>
         </div>
-        <div class="col-2">
-          <button type="button" class="btn btn-primary p-3" onclick="buscarEmpleado()">
-            <i class="bi bi-search"></i>
-          </button>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="nombre" placeholder="" readonly required>
-            <label for="nombre">Nombre del Empleado</label>
-          </div>
-        </div>
-        <div class="col">
-          <div class="form-floating">
-            <select class="form-select" id="turnoTrabajo" name="turnoTrabajo"
-              aria-label="Floating label select example">
-              <option value="Hoteles">Hoteles</option>
-              <option value="Clientes Ocasionales">Clientes Ocasionales</option>
-            </select>
-            <label for="floatingSelect">Seleccione su turno</label>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <div class="row">
+        <div class="row">
+          <div class="col">
             <div class="col">
-              <input type="date" name="fecha" id="fecha" class="form-control" required>
-            </div>
-            <div class="col p-2">
-              <input class="form-check-input" type="checkbox" value="" id="festivo" name="festivo">
-              <label class="form-check-label" for="checkDefault">
-                Dia Festivo
-              </label>
+              <div class="form-floating mb-3">
+                <!-- <input type="number" class="form-control" id="cedula" name="cedula" placeholder="1234567890" required> -->
+                <select class="form-select" name="cedula" id="cedula">
+
+                </select>
+                <label for="cedula">Empleado</label>
+              </div>
             </div>
           </div>
 
         </div>
-        <div class="col">
-          <div class="input-group mb-3">
-            <span class="input-group-text">Hora de Inicio</span>
-            <input type="time" class="form-control" name="hInicio" id="hInicio" required>
-            <span class="input-group-text">Hora de Fin</span>
-            <input type="time" class="form-control" name="hFin" id="hFin" required>
+        <div class="row">
+          <div class="col">
+            <div class="form-floating">
+              <select class="form-select" id="turnoTrabajo" name="turnoTrabajo"
+                aria-label="Floating label select example">
+                <option value="Hoteles">Hoteles</option>
+                <option value="Clientes Ocasionales">Clientes Ocasionales</option>
+              </select>
+              <label for="floatingSelect">Seleccione su turno</label>
+            </div>
+          </div>
+          <div class="col">
+            <div class="row">
+              <div class="col">
+                <input type="date" name="fecha" id="fecha" class="form-control p-3" required>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col py-2 px-3 my-3">
-          <button type="submit" class="btn btn-success" id="registrar" name="registrar">
-            Registrar Horas Extras
-          </button>
+        <div class="row">
+          <div class="col mx-2 p-2">
+            <input class="form-check-input" type="checkbox" value="" id="festivo" name="festivo">
+            <label class="form-check-label" for="checkDefault">
+              Dia Festivo
+            </label>
+          </div>
+          <div class="col-12">
+            <div class="input-group mb-3">
+              <span class="input-group-text">Hora de Inicio</span>
+              <input type="time" class="form-control" name="hInicio" id="hInicio" required>
+              <span class="input-group-text">Hora de Fin</span>
+              <input type="time" class="form-control" name="hFin" id="hFin" required>
+            </div>
+          </div>
+
         </div>
-      </div>
+        <div class="row">
+          <div class="col py-2 px-3 my-3">
+            <button type="submit" class="btn btn-success" id="registrar" name="registrar">
+              Registrar Horas Extras
+            </button>
+          </div>
+        </div>
     </form>
+  </div>
+
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="liveToast" class="toast bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-body text-white">
+        <i class="bi bi-check-circle-fill"></i> Horas extras registradas
+      </div>
+    </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"

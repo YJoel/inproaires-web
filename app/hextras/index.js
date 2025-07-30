@@ -1,14 +1,5 @@
 const form = document.forms["registro-horas-extras"];
-const jornada = {
-  Hoteles: {
-    inicio: [9, 0],
-    fin: [17, 0],
-  },
-  "Clientes Ocasionales": {
-    inicio: [9, 0],
-    fin: [18, 0],
-  },
-};
+
 const diasSemana = [
   "Lunes",
   "Martes",
@@ -18,6 +9,13 @@ const diasSemana = [
   "Sabado",
   "Domingo",
 ];
+
+const toastTrigger = document.getElementById("registrar");
+const toastLiveExample = document.getElementById("liveToast");
+let toastBootstrap = "";
+if (toastTrigger) {
+  toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
+}
 
 async function buscarEmpleado() {
   // console.log(form["cedula"].value);
@@ -35,130 +33,188 @@ function cargarFecha() {
 
 document.body.addEventListener("load", cargarFecha());
 
-async function registrarHorasExtras(ev) {
+async function calcularHorasExtras(ev) {
   ev.preventDefault();
 
-  let hInicio = form["hInicio"].value;
-  let hFin = form["hFin"].value;
-  let turno = form["turnoTrabajo"].value;
-  let festivo = form["festivo"].checked;
-  let turnoCopy = turno;
-  let diaSemana = new Date(form["fecha"].value).getDay();
-  let extraDiurna = horasExtrasDiurnas(
-    hInicio,
-    hFin,
-    turnoCopy,
-    diaSemana,
-    festivo
-  );
-  let extraNocturna = horasExtrasNocturna(hInicio, hFin, turnoCopy);
-  let nHoras = extraDiurna + extraNocturna;
-
-  let hextra = {
-    cedula: form["cedula"].value,
-    nombre: form["nombre"].value,
-    fecha: form["fecha"].value,
-    nHoras: nHoras,
-    diaSemana: diasSemana[diaSemana],
-    hNocturnas: extraNocturna,
-    hDiurnas: extraDiurna,
-    hInicio: hInicio,
-    hFin: hFin,
-    turno: turno,
-    festivo: festivo == true ? "SI" : "NO",
+  const convertirTiempo = (fecha, str) => {
+    const [hora, minuto] = str.split(":").map(Number);
+    const f = new Date(fecha);
+    f.setHours(hora, minuto, 0, 0);
+    return f;
   };
 
-  // console.log(hextra);
-  const result = await hExtra.insert(hextra);
-  if (result.error == 0) {
-    alert("Horas extras registradas con éxito");
-  } else {
-    alert(
-      "Error al ingresar horas extras, actualice la página e intente nuevamente"
-    );
+  try {
+    const fechaStr = form["fecha"].value; // formato esperado: "YYYY-MM-DD"
+    const diaSemana = new Date(fechaStr).getDay(); // 0 = domingo, 6 = sábado
+
+    let entradaStr = form["hInicio"].value;
+    let salidaStr = form["hFin"].value;
+    let tipoJornada = form["turnoTrabajo"].value;
+    let festivo = form["festivo"].checked;
+    const entrada = convertirTiempo(fechaStr, entradaStr);
+    const salida = convertirTiempo(fechaStr, salidaStr);
+
+    let jornada;
+
+    if (entrada > salida) {
+      salida.setDate(salida.getDate() + 1);
+      // fechaStr2.s]etDate(fechaStr2.getDate() + 1);
+      jornada = [
+        [
+          convertirTiempo(fechaStr, "00:00"),
+          convertirTiempo(fechaStr, "00:00"),
+        ],
+      ];
+    } else {
+      if (diaSemana === 5) {
+        // Sábado
+        jornada = [
+          [
+            convertirTiempo(fechaStr, "08:00"),
+            convertirTiempo(fechaStr, "13:00"),
+          ],
+        ];
+      } else if (diaSemana === 6 || festivo) {
+        console.log("Domingo | festivo");
+        jornada = [
+          [
+            convertirTiempo(fechaStr, "00:00"),
+            convertirTiempo(fechaStr, "00:00"),
+          ],
+        ];
+      } else if (diaSemana < 5) {
+        if (tipoJornada === "Hoteles") {
+          jornada = [
+            [
+              convertirTiempo(fechaStr, "08:00"),
+              convertirTiempo(fechaStr, "12:00"),
+            ],
+            [
+              convertirTiempo(fechaStr, "13:00"),
+              convertirTiempo(fechaStr, "17:00"),
+            ],
+          ];
+        } else if (tipoJornada === "Clientes Ocasionales") {
+          jornada = [
+            [
+              convertirTiempo(fechaStr, "08:00"),
+              convertirTiempo(fechaStr, "12:00"),
+            ],
+            [
+              convertirTiempo(fechaStr, "14:00"),
+              convertirTiempo(fechaStr, "18:00"),
+            ],
+          ];
+        }
+      } else {
+        throw new Error("Tipo de jornada no válida");
+      }
+    }
+
+    let minutosExtrasDiurna = 0;
+    let minutosExtrasNocturna = 0;
+    let jorndaDiurna = {
+      inicio: new Date(fechaStr),
+      fin: new Date(fechaStr),
+    };
+    jorndaDiurna.inicio.setHours(6, 0);
+    jorndaDiurna.fin.setHours(19, 0);
+
+    for (
+      let actual = new Date(entrada);
+      actual < salida;
+      actual.setMinutes(actual.getMinutes() + 1)
+    ) {
+      const estaDentro = jornada.some(
+        ([inicio, fin]) => actual >= inicio && actual < fin
+      );
+      if (!estaDentro) {
+        if (actual >= jorndaDiurna.inicio && actual < jorndaDiurna.fin) {
+          minutosExtrasDiurna++;
+        } else {
+          minutosExtrasNocturna++;
+        }
+      }
+    }
+
+    let extraNocturna = Math.round(minutosExtrasNocturna / 60);
+    let extraDiurna = Math.round(minutosExtrasDiurna / 60);
+    let empleados = JSON.parse(sessionStorage.getItem("empleados"));
+    let empleado = "";
+    try {
+      empleado = empleados.find((em) => {
+        return em.cedula == form["cedula"].value;
+      });
+    } catch (error) {}
+
+    let hextra = {
+      cedula: form["cedula"].value,
+      nombre: empleado.nombre,
+      fecha: form["fecha"].value,
+      nHoras: (salida - entrada) / (60000 * 60),
+      diaSemana: diasSemana[diaSemana],
+      hNocturnas: extraNocturna,
+      hDiurnas: extraDiurna,
+      hInicio: entradaStr,
+      hFin: salidaStr,
+      turno: tipoJornada,
+      festivo: festivo == true ? "SI" : "NO",
+    };
+
+    console.log(hextra);
+    const result = await hExtra.insert(hextra);
+    if (result.error == 0) {
+      toastLiveExample.classList = "toast bg-success";
+      toastLiveExample.innerHTML = `
+        <div class="toast-body text-white">
+          <i class="bi bi-check-circle-fill"></i> Horas extras registradas
+        </div>
+      `;
+      // alert("Horas extras registradas");
+    } else {
+      throw new Error(
+        "Error al ingresar horas extras, actualice la página e intente nuevamente"
+      );
+    }
+  } catch (error) {
+    toastLiveExample.classList = "toast bg-danger";
+    toastLiveExample.innerHTML = `
+      <div class="toast-body text-white">
+        <i class="bi bi-x-circle-fill"></i> Error al ingresar horas extras, actualice la página e intente nuevamente
+      </div>
+    `;
+    // alert(error);
+    console.log(error);
   }
+
+  toastBootstrap.show();
 
   form.reset();
   cargarFecha();
 }
 
-function restarHoras(horaInicio, horaFin) {
-  let val1 = horaInicio.split(":").map((el) => {
-    return parseInt(el);
-  });
-  let val2 = horaFin.split(":").map((el) => {
-    return parseInt(el);
-  });
+form.addEventListener("submit", calcularHorasExtras);
 
-  val1 = val1[0] * 60 + val1[1];
+document.body.addEventListener("load", cargarEmpleados());
+async function cargarEmpleados() {
+  try {
+    const select = document.getElementById("cedula");
+    const arrayEmpleados = await empleados.getAll();
+    sessionStorage.setItem("empleados", JSON.stringify(arrayEmpleados));
+    // const select = ev.target;
 
-  val2 = val2[0] * 60 + val2[1];
+    // console.log(arrayEmpleados);
 
-  let resultado = (val2 - val1) / 60;
-
-  return Math.round(resultado);
-}
-
-function horasExtrasDiurnas(horaInicio, horaFin, turno, diaSemana, festivo) {
-  let resultado = 0;
-  // console.log(jornada[turno], turno);
-  let dif1 = restarHoras(jornada[turno].fin.join(":"), horaInicio);
-  let dif2 = restarHoras(horaFin, "19:0");
-  let limInf = 0;
-  let limSup = 0;
-
-  if (diaSemana != "Domingo" && !festivo) {
-    if (dif1 <= 0) {
-      limInf = jornada[turno].fin.join(":");
-    } else {
-      limInf = horaInicio;
-    }
-    if (dif2 >= 0) {
-      limSup = horaFin;
-    } else {
-      limSup = "19:00";
-    }
-  } else {
-    limInf = horaInicio;
-    if (dif2 >= 0) {
-      limSup = horaFin;
-    } else {
-      limSup = "19:00";
-    }
+    arrayEmpleados.forEach((em) => {
+      select.innerHTML += `<option value="${em.cedula}">${em.nombre}</option>`;
+    });
+  } catch (error) {
+    toastLiveExample.classList = "toast bg-danger";
+    toastLiveExample.innerHTML = `
+      <div class="toast-body text-white">
+        <i class="bi bi-x-circle-fill"></i> No se pudo conectar a la base de datos
+      </div>
+    `;
+    toastBootstrap.show();
   }
-
-  resultado = restarHoras(limInf, limSup);
-
-  return resultado;
 }
-
-function horasExtrasNocturna(horaInicio, horaFin, turno) {
-  let resultado = 0;
-  let dif1 = restarHoras("19:0", horaInicio);
-  let dif2 = restarHoras("19:0", horaFin);
-  let limInf = 0;
-  let limSup = 0;
-
-  // console.log(dif1, dif2, limInf, limSup);
-
-  if (dif1 < dif2) {
-    if (dif1 <= 0) {
-      limInf = "19:0";
-    } else {
-      limInf = horaInicio;
-    }
-    limSup = horaFin;
-    if (restarHoras(limInf, limSup) < 0) {
-      return 0;
-    }
-  } else {
-    return 0;
-  }
-  // console.log(dif1, dif2, limInf, limSup);
-
-  resultado = restarHoras(limInf, limSup);
-
-  return resultado;
-}
-
-form.addEventListener("submit", registrarHorasExtras);
