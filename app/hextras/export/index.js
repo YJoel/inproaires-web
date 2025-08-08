@@ -14,18 +14,9 @@ async function bajarReporte(ev) {
 
   // console.log(filtroMes);
   exportarXLSX(filtroMes);
-}
+} 
 
 async function exportarXLSX(data) {
-  // const rows = [];
-  // randomNumbers = M.generarNumerosAleatorios();
-  // randomNumbers.forEach((el, i) => {
-  //   rows[i] = {
-  //     "#": i + 1,
-  //     r: randomNumbers[i],
-  //   };
-  // });
-
   /* generate worksheet and workbook */
   const worksheetEx = XLSX.utils.json_to_sheet(data);
   const workbookEx = XLSX.utils.book_new();

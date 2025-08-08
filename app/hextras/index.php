@@ -99,7 +99,6 @@
               <input type="time" class="form-control" name="hFin" id="hFin" required>
             </div>
           </div>
-
         </div>
         <div class="row">
           <div class="col py-2 px-3 my-3">
@@ -118,6 +117,7 @@
       </div>
     </div>
   </div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
     integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
@@ -128,9 +128,9 @@
   <script>
     const dominio = "www.inproaires.com.co";
   </script>
-  <script src="empleados.js"></script>
-  <script src="hextras.js"></script>
-  <script src="index.js"></script>
+  <script src="./../dashboard/hextras/empleados.js"></script>
+  <script src="./../dashboard/hextras/hextras.js"></script>
+  <script src="./../dashboard/hextras/index.js"></script>
 </body>
 
 </html>

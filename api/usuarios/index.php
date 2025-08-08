@@ -11,7 +11,21 @@ $usuariosController = new UsuariosController();
 switch ($_SERVER["REQUEST_METHOD"]) {
   case "GET":
     if (isset($_GET["password"])) {
-      echo $usuariosController->checkPassword($_GET["email"], $_GET["password"]);
+      $response = $usuariosController->checkPassword($_GET["email"], $_GET["password"]);
+      // echo json_encode($response);
+      if ($response["checkPassword"] == true) {
+        setcookie(
+          "user",
+          json_encode($response["user"]),
+          [
+            "expires" => time() + 3600,
+            "path" => "/",
+            // "secure" => true, // Solo por HTTPS
+            "httponly" => true // No accesible por JavaScript
+          ]
+        );
+      }
+      echo json_encode(["checkPassword" => $response["checkPassword"]]);
     }
     break;
   case "POST":

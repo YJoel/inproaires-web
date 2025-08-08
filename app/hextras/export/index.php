@@ -60,7 +60,7 @@
   </script>
   <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
   <!-- <script src="./../../assets/sheetjs/dist/xlsx.full.min.js"></script> -->
-  <script src="./../hextras.js"></script>
+  <script src="./../../dashboard/hextras/hextras.js"></script>
   <script src="index.js"></script>
 </body>
 

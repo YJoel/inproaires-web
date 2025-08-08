@@ -1,3 +1,24 @@
+<?php
+
+session_start();
+
+// Cookie para mantener la sesión durante un tiempo determinado
+$user = "";
+if (isset($_COOKIE['user'])) {
+  $user = json_decode($_COOKIE['user']);
+  // echo "<script> console.log('$user') </script>";
+} else {
+  header("location: ./../login/");
+}
+
+if (isset($_GET["logout"])) {
+  setcookie("user", "", time() - 3600, "/");
+  header("location: ./../login/");
+  exit;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -6,11 +27,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashobard - Inproaires</title>
 
-  <link rel="shortcut icon" href="http://localhost:3000/web/img/elice_inproaires_5.png" type="image/x-icon">
+  <link rel="shortcut icon" href="./../../web/img/elice_inproaires_5.png" type="image/x-icon">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
   <!-- Custom fonts for this template-->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
+  <link href="./vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
   <link
     href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
     rel="stylesheet" />
@@ -18,7 +39,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
   <!-- Custom styles for this template-->
-  <link href="css/sb-admin-2.min.css" rel="stylesheet" />
+  <link href="./css/sb-admin-2.min.css" rel="stylesheet" />
 </head>
 
 <body id="page-top">
@@ -29,7 +50,7 @@
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="./">
         <div class="sidebar-brand-icon">
-          <img src="./../../web/img/elice_inproaires_5.png" width="30" height="30" alt="">
+          <img src="./../../../web/img/elice_inproaires_5.png" width="30" height="30" alt="">
         </div>
         <div class="sidebar-brand-text mx-3">INPROAIRES</div>
       </a>
@@ -39,90 +60,29 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href="./">
+        <a class="nav-link" href="#">
           <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>INICIO</span></a>
+          <span>Inicio</span></a>
       </li>
 
       <!-- Divider -->
       <hr class="sidebar-divider" />
 
       <!-- Heading -->
-      <div class="sidebar-heading">Interface</div>
-
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
-          aria-controls="collapseTwo">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>Components</span>
-        </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Components:</h6>
-            <a class="collapse-item" href="">Buttons</a>
-            <a class="collapse-item" href="">Cards</a>
-          </div>
-        </div>
-      </li>
-
-      <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-          aria-expanded="true" aria-controls="collapseUtilities">
-          <i class="fas fa-fw fa-wrench"></i>
-          <span>Utilities</span>
-        </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Utilities:</h6>
-            <a class="collapse-item" href="">Colors</a>
-            <a class="collapse-item" href="">Borders</a>
-            <a class="collapse-item" href="">Animations</a>
-            <a class="collapse-item" href="">Other</a>
-          </div>
-        </div>
-      </li>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider" />
-
-      <!-- Heading -->
-      <div class="sidebar-heading">Addons</div>
-
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
-          aria-controls="collapsePages">
-          <i class="fas fa-fw fa-folder"></i>
-          <span>Pages</span>
-        </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Login Screens:</h6>
-            <a class="collapse-item" href="">Login</a>
-            <a class="collapse-item" href="">Register</a>
-            <a class="collapse-item" href="">Forgot Password</a>
-            <div class="collapse-divider"></div>
-            <h6 class="collapse-header">Other Pages:</h6>
-            <a class="collapse-item" href="">404 Page</a>
-            <a class="collapse-item" href="">Blank Page</a>
-          </div>
-        </div>
-      </li>
+      <div class="sidebar-heading">Empleados</div>
 
       <!-- Nav Item - Charts -->
       <li class="nav-item">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="./hextras/">
           <i class="fas fa-fw fa-chart-area"></i>
-          <span>Charts</span></a>
+          <span>Horas Extras</span></a>
       </li>
 
       <!-- Nav Item - Tables -->
       <li class="nav-item">
-        <a class="nav-link" href="">
+        <a class="nav-link" href="./proyectos/">
           <i class="fas fa-fw fa-table"></i>
-          <span>Tables</span></a>
+          <span>Proyectos</span></a>
       </li>
 
       <!-- Divider -->
@@ -147,17 +107,24 @@
           </button>
 
           <!-- Topbar Search -->
-          <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-            <div class="input-group">
-              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                aria-label="Search" aria-describedby="basic-addon2" />
-              <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                  <i class="fas fa-search fa-sm"></i>
-                </button>
-              </div>
-            </div>
-          </form>
+          <div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <button type="button" class="btn btn-light">
+              <i class="bi bi-clock d-inline-block"></i>
+              <div id="time" class="d-inline-block"></div>
+            </button>
+            <script>
+              setInterval(() => {
+                const date = new Date();
+                let hora = date.getHours() < 10 ? `0${date.getHours()}` : date.getHours();
+                let minutes = date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes();
+                // let seconds = date.getSeconds() < 10 ? `0${date.getSeconds()}` : date.getSeconds();
+
+                document.getElementById("time").innerHTML = `
+                   ${hora}:${minutes}
+                `;
+              }, 1000)
+            </script>
+          </div>
 
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
@@ -184,135 +151,16 @@
               </div>
             </li>
 
-            <!-- Nav Item - Alerts
-            <li class="nav-item dropdown no-arrow mx-1">
-              <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-bell fa-fw"></i>
-                <!-- Counter - Alerts
-                <span class="badge badge-danger badge-counter">3+</span>
-              </a>
-              <!-- Dropdown - Alerts
-              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                aria-labelledby="alertsDropdown">
-                <h6 class="dropdown-header">Alerts Center</h6>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <div class="mr-3">
-                    <div class="icon-circle bg-primary">
-                      <i class="fas fa-file-alt text-white"></i>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="small text-gray-500">December 12, 2019</div>
-                    <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                  </div>
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <div class="mr-3">
-                    <div class="icon-circle bg-success">
-                      <i class="fas fa-donate text-white"></i>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="small text-gray-500">December 7, 2019</div>
-                    $290.29 has been deposited into your account!
-                  </div>
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <div class="mr-3">
-                    <div class="icon-circle bg-warning">
-                      <i class="fas fa-exclamation-triangle text-white"></i>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="small text-gray-500">December 2, 2019</div>
-                    Spending Alert: We've noticed unusually high spending for
-                    your account.
-                  </div>
-                </a>
-                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-              </div>
-            </li> -->
-
-            <!-- Nav Item - Messages
-            <li class="nav-item dropdown no-arrow mx-1">
-              <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-envelope fa-fw"></i>
-                <!-- Counter - Messages
-                <span class="badge badge-danger badge-counter">7</span>
-              </a>
-              <!-- Dropdown - Messages
-              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                aria-labelledby="messagesDropdown">
-                <h6 class="dropdown-header">Message Center</h6>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="img/undraw_profile_1.svg" alt="..." />
-                    <div class="status-indicator bg-success"></div>
-                  </div>
-                  <div class="font-weight-bold">
-                    <div class="text-truncate">
-                      Hi there! I am wondering if you can help me with a
-                      problem I've been having.
-                    </div>
-                    <div class="small text-gray-500">Emily Fowler · 58m</div>
-                  </div>
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="img/undraw_profile_2.svg" alt="..." />
-                    <div class="status-indicator"></div>
-                  </div>
-                  <div>
-                    <div class="text-truncate">
-                      I have the photos that you ordered last month, how would
-                      you like them sent to you?
-                    </div>
-                    <div class="small text-gray-500">Jae Chun · 1d</div>
-                  </div>
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="img/undraw_profile_3.svg" alt="..." />
-                    <div class="status-indicator bg-warning"></div>
-                  </div>
-                  <div>
-                    <div class="text-truncate">
-                      Last month's report looks great, I am very happy with
-                      the progress so far, keep up the good work!
-                    </div>
-                    <div class="small text-gray-500">Morgan Alvarez · 2d</div>
-                  </div>
-                </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="..." />
-                    <div class="status-indicator bg-success"></div>
-                  </div>
-                  <div>
-                    <div class="text-truncate">
-                      Am I a good boy? The reason I ask is because someone
-                      told me that people say this to all dogs, even if they
-                      aren't good...
-                    </div>
-                    <div class="small text-gray-500">
-                      Chicken the Dog · 2w
-                    </div>
-                  </div>
-                </a>
-                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
-              </div>
-            </li> -->
-
             <div class="topbar-divider d-none d-sm-block"></div>
 
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                <img class="img-profile rounded-circle" src="img/undraw_profile.svg" />
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                  <?php echo $user->nombre . "<br>" . $user->email; ?>
+                </span>
+                <img class="img-profile rounded-circle" src="./../img/undraw_profile.svg" />
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -341,57 +189,34 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
-          <!-- Page Heading -->
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verProyectos">
-            <i class="bi bi-stack"></i>
-            VER PROYECTOS
-          </button>
-          <div class="d-sm-flex align-items-center justify-content-around mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Subir Proyectos</h1>
-          </div>
-
-          <!-- Content Row -->
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col">
-
-                <form name="form-proyectos">
+          <div class="row">
+            <div class="col">
+              <a class="card shadow mb-4 border-left-primary" href="./proyectos/" style="text-decoration: none">
+                <div class="card-header py-3">
+                  <h4 class="m-0">PROYECTOS</h4>
+                </div>
+                <div class="card-body">
                   <div class="row">
-                    <div class="col">
-                      <label for="titulo" class="form-label">Titulo</label>
-                      <input type="text" name="titulo" id="titulo" class="form-control">
-                    </div>
-                    <div class="col">
-                      <label for="descripcion" class="form-label">Descripcion</label>
-                      <textarea name="descripcion" id="descripcion" class="form-control" rows="5"></textarea>
+                    <div class="col text-muted">
+                      Gestiona los proyectos para visualizar desde <b>inproaires.com.co</b>
                     </div>
                   </div>
-                  <div class="row pt-2">
-                    <div class="col">
-                      <label for="file" class="form-label">Imagen de Fondo</label>
-                      <input type="file" name="backgroundImg" id="backgroundImg" class="form-control"
-                        accept="image/*" />
-                    </div>
-                    <div class="col">
-                      <label for="file" class="form-label">Evidencias</label>
-                      <input type="file" name="evidences" id="evidences" multiple class="form-control"
-                        accept="image/*" />
-                    </div>
-                  </div>
-                  <div class="row py-3">
-                    <div class="col text-center">
-                      <input type="submit" class="btn btn-outline-success w-100" value="Subir Contenido del Proyecto">
-                    </div>
-                  </div>
-                </form>
-
-              </div>
+                </div>
+              </a>
             </div>
-
-            <div class="row">
-              <div class="col">
-                <img id="upload-image" src="" alt="">
-              </div>
+            <div class="col">
+              <a class="card shadow mb-4 border-left-primary" href="./hextras/" style="text-decoration: none">
+                <div class="card-header py-3">
+                  <h4 class="m-0">HORAS EXTRAS</h4>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col text-muted">
+                      Gestiona y administra las horas extras registradas por los trabajadores
+                    </div>
+                  </div>
+                </div>
+              </a>
             </div>
           </div>
         </div>
@@ -403,7 +228,7 @@
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2021</span>
+            <span>Copyright &copy; INPROAIRES SAS 2025</span>
           </div>
         </div>
       </footer>
@@ -418,90 +243,6 @@
     <i class="fas fa-angle-up"></i>
   </a>
 
-  <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          Select "Logout" below if you are ready to end your current session.
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">
-            Cancel
-          </button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODAL - VER PROYECTOS -->
-  <div class="modal fade" id="verProyectos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-4" id="exampleModalLabel">Proyectos Subidos</h1>
-          <button type="button" class="btn btn-primary p-1 mx-2" onclick="proyectosToHTML()">Sincronizar <i
-              class="bi bi-arrow-repeat"></i></button>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="editarProyecto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Proyecto</h1>
-          <button type="button" class="btn-close" data-bs-toggle="modal" data-bs-target="#verProyectos"></button>
-        </div>
-        <div class="modal-body">
-          <form name="editarProyecto">
-            <div class="row">
-              <div class="col">
-                <label for="titulo" class="form-label">Titulo</label>
-                <input type="text" name="titulo" id="titulo" class="form-control">
-              </div>
-              <div class="col">
-                <label for="descripcion" class="form-label">Descripcion</label>
-                <textarea name="descripcion" id="descripcion" class="form-control" rows="5"></textarea>
-              </div>
-            </div>
-            <div class="row pt-2">
-              <div class="col">
-                <label for="file" class="form-label">Imagen de Fondo</label>
-                <input type="file" name="backgroundImg" id="backgroundImg" class="form-control" accept="image/*" />
-              </div>
-              <div class="col">
-                <label for="file" class="form-label">Evidencias</label>
-                <input type="file" name="evidences" id="evidences" multiple class="form-control" accept="image/*" />
-              </div>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
-            data-bs-target="#verProyectos">Cancelar</button>
-          <button type="button" class="btn btn-primary">Subir Cambios</button>
-        </div>
-      </div>
-    </div>
-  </div>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
     integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
     crossorigin="anonymous"></script>
@@ -525,8 +266,6 @@
   <script src="js/demo/chart-area-demo.js"></script>
   <script src="js/demo/chart-pie-demo.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
-  <script src="proyectos.js"></script>
-  <script src="index.js"></script>
 </body>
 
 </html>

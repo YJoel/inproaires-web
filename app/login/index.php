@@ -21,21 +21,24 @@
         <img src="./../../web/img/INPROAIRES_LOGO_10.png" alt="">
       </div>
     </div>
-    <form name="form-login">
-      <div class="row py-2 px-4">
+    <form name="form-login" class="p-4">
+      <div class="alert alert-success text-center" role="alert">
+        "Ingrese su correo corporativo y contraseña para iniciar sesión"
+      </div>
+      <div class="row">
         <div class="col">
           <label for="email" class="form-label">Correo</label>
-          <input type="email" class="form-control" id="email" placeholder="name@inproaires.com"
-            pattern="[a-z]+@inproaires.com" required>
+          <input type="email" class="form-control" id="email" placeholder="name@inproaires.com.co"
+            pattern="[a-z]+@inproaires.com.co" required>
         </div>
       </div>
-      <div class="row py-2 px-4">
+      <div class="row">
         <div class="col">
           <label for="password" class="form-label">Contraseña</label>
           <input type="password" class="form-control" id="password" placeholder="********" required>
         </div>
       </div>
-      <div class="row p-4">
+      <div class="row pt-4">
         <div class="col">
           <button type="submit" class="btn">
             Iniciar Sesión
@@ -59,7 +62,10 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.min.js"
     integrity="sha384-RuyvpeZCxMJCqVUGFI0Do1mQrods/hhxYlcVfGPOfQtPJh0JCw12tUAZ/Mv10S7D"
     crossorigin="anonymous"></script>
-  <script src="./../dashboard/proyectos.js"></script>
+  <script>
+    const dominio = "www.inproaires.com.co";
+  </script>
+  <script src="usuarios.js"></script>
   <script module src="index.js"></script>
 </body>
 

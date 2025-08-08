@@ -46,6 +46,19 @@ button[type="submit"]:hover {
   border: 2px solid var(--verde);
 }
 
+button[type="btn"] {
+  width: 100%;
+  color: white;
+  background-color: var(--azul-claro);
+  border: 2px solid var(--azul-claro);
+}
+
+button[type="btn"]:hover {
+  color: var(--azul-claro);
+  background-color: white;
+  border: 2px solid var(--azul-claro);
+}
+
 .container-logo {
   position: relative;
   display: flex;
