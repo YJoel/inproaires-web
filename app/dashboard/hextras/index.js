@@ -59,7 +59,7 @@ async function calcularHorasExtras(ev) {
           ],
         ];
       } else if (diaSemana === 6 || festivo) {
-        console.log("Domingo | festivo");
+        // console.log("Domingo | festivo");
         jornada = [
           [
             convertirTiempo(fechaStr, "00:00"),
@@ -144,7 +144,7 @@ async function calcularHorasExtras(ev) {
       festivo: festivo == true ? "SI" : "NO",
     };
 
-    console.log(hextra);
+    // console.log(hextra);
     const result = await hExtra.insert(hextra);
     if (result.error == 0) {
       toastLiveExample.classList = "toast bg-success";

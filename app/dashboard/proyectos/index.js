@@ -22,7 +22,7 @@ document.forms["form-proyectos"].addEventListener("submit", async (ev) => {
   //   console.log(imgs[index]);
   // }
   for (let index = 0; index < imgs.length + 1; index++) {
-    console.log(index);
+    // console.log(index);
     if (index == 0) {
       b64Images[index] = await comprimirImagen(backgroundImg[index]);
     } else {
@@ -60,7 +60,7 @@ document.forms["form-proyectos"].addEventListener("submit", async (ev) => {
     alert("NO SE PUDO INGRESAR EL PROYECTO, INTENTE NUEVAMENTE");
   }
   form.reset();
-  console.log(data);
+  // console.log(data);
 });
 
 function comprimirImagen(file, maxWidth = 1920, calidad = 0.7) {
@@ -101,7 +101,7 @@ function comprimirImagen(file, maxWidth = 1920, calidad = 0.7) {
 
 async function proyectosToHTML() {
   let proyectos = await getAll();
-  console.log(proyectos);
+  // console.log(proyectos);
   const table = document.createElement("table");
   table.classList.add("table", "table-hover");
   table.innerHTML = `
@@ -165,7 +165,7 @@ async function dataToFormHTML(id) {
   const form = document.forms["editarProyecto"];
   form["titulo"].value = proyecto[0].titulo;
   form["descripcion"].value = proyecto[0].descripcion;
-  console.log(proyecto[0]);
+  // console.log(proyecto[0]);
 }
 
 function cerrarSesion() {
