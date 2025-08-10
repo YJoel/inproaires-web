@@ -15,13 +15,14 @@ const usuarios = {
    * @returns
    */
   checkPassword: async function ({ email, password }) {
-    // console.log(email, password);
-    const response = await fetch(
-      `${this.apiUrl}?email=${email}&password=${encodeURIComponent(password)}`,
-      {
-        method: "GET",
-      }
-    );
+    const response = await fetch(`${this.apiUrl}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include", // 🔥 Esto permite que el navegador guarde la cookie
+      body: JSON.stringify({ email, password }),
+    });
 
     return await response.json();
   },

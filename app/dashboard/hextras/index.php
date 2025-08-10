@@ -12,7 +12,7 @@ if (isset($_COOKIE['user'])) {
 }
 
 if (isset($_GET["logout"])) {
-  setcookie("id", "", time() - 3600, "/");
+  setcookie("user", "", time() - 3600, "/");
   header("location: ./../../login/");
   exit;
 }
