@@ -8,6 +8,9 @@ header("Access-Control-Allow-Credentials: true");
 require_once "./controller/usuarios.controller.php";
 require_once "./dto/usuarios.dto.php";
 
+session_set_cookie_params(3600); // 1 hora
+session_start();
+
 $usuariosController = new UsuariosController();
 switch ($_SERVER["REQUEST_METHOD"]) {
   case "GET":
@@ -19,15 +22,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
       $response = $usuariosController->checkPassword($usuarioArray["email"], $usuarioArray["password"]);
       // echo json_encode($response);
       if ($response["checkPassword"] == true) {
-        setcookie(
-          "user",
-          json_encode($response["user"]),
-          time() + 3600,
-          "/",
-          "",
-          true,
-          true
-        );
+        $_SESSION["user"] = json_encode($response["user"]);
       }
       echo json_encode(["checkPassword" => $response["checkPassword"]]);
     } else {

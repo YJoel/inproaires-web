@@ -4,15 +4,16 @@ session_start();
 
 // Cookie para mantener la sesión durante un tiempo determinado
 $user = "";
-if (isset($_COOKIE['user'])) {
-  $user = json_decode($_COOKIE['user']);
+if (isset($_SESSION['user'])) {
+  $user = json_decode($_SESSION['user']);
   // echo "<script> console.log('$user') </script>";
 } else {
   header("location: ./../../login/");
 }
 
 if (isset($_GET["logout"])) {
-  setcookie("user", "", time() - 3600, "/");
+  session_unset();
+  session_destroy();
   header("location: ./../../login/");
   exit;
 }
