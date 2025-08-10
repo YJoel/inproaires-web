@@ -1,6 +1,5 @@
 const usuarios = {
-  apiUrl: "",
-  apiName: "usuarios",
+  apiUrl: "./../../../api/usuarios/",
   getAll: async function () {
     const response = await fetch(this.apiUrl, {
       method: "GET",
@@ -49,12 +48,3 @@ const usuarios = {
     });
   },
 };
-
-if (dominio.search(location.hostname) >= 0) {
-  /* FOR DEPLOY */
-  usuarios.apiUrl = `https://inproaires.com.co/api/${usuarios.apiName}/`;
-} else {
-  /* FOR DEVELOP */
-  // apiUrl = `http://localhost:3000/api/${apiName}/`;
-  usuarios.apiUrl = `./../../../api/${usuarios.apiName}/`;
-}

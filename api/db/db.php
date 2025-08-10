@@ -16,7 +16,7 @@ class DB
       $this->dbname = "inproaires";
       $this->password = "";
       $this->username = "root";
-    } elseif ($_SERVER["SERVER_NAME"] == "inproaires.com.co") {
+    } elseif ($_SERVER["SERVER_NAME"] == "inproaires.com.co" || $_SERVER["SERVER_NAME"] == "www.inproaires.com.co") {
       $this->servername = "localhost";
       $this->dbname = "pinproap1_inproaires";
       $this->password = "@Yer1006son#";

@@ -1,6 +1,5 @@
 const empleados = {
-  apiUrl: "",
-  apiName: "empleados",
+  apiUrl: "./../../../api/empleados/",
   getAll: async function () {
     const response = await fetch(this.apiUrl, {
       method: "GET",
@@ -39,12 +38,3 @@ const empleados = {
     });
   },
 };
-
-if (dominio.search(location.hostname) >= 0) {
-  /* FOR DEPLOY */
-  empleados.apiUrl = `https://inproaires.com.co/api/${empleados.apiName}/`;
-} else {
-  /* FOR DEVELOP */
-  // apiUrl = `http://localhost:3000/api/${apiName}/`;
-  empleados.apiUrl = `./../../../api/${empleados.apiName}/`;
-}

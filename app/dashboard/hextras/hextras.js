@@ -1,6 +1,5 @@
 const hExtra = {
-  apiUrl: "",
-  apiName: "hextras",
+  apiUrl: "./../../../api/hextras/",
   getAll: async function () {
     const response = await fetch(this.apiUrl, {
       method: "GET",
@@ -39,12 +38,3 @@ const hExtra = {
     });
   },
 };
-
-if (dominio.search(location.hostname) >= 0) {
-  /* FOR DEPLOY */
-  hExtra.apiUrl = `https://inproaires.com.co/api/${hExtra.apiName}/`;
-} else {
-  /* FOR DEVELOP */
-  // apiUrl = `http://localhost:3000/api/${apiName}/`;
-  hExtra.apiUrl = `./../../../api/${hExtra.apiName}/`;
-}

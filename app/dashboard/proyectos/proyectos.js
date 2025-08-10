@@ -1,13 +1,4 @@
-let apiUrl = "";
-const dominio = "www.inproaires.com.co";
-const apiName = "proyectos";
-if (dominio.search(location.hostname) >= 0) {
-  /* FOR DEPLOY */
-  apiUrl = `https://inproaires.com/api/${apiName}/`;
-} else if (location.hostname == "localhost") {
-  /* FOR DEVELOP */
-  apiUrl = `https://inproaires.com/api/${apiName}/`;
-}
+let apiUrl = "./../../../api/proyectos/";
 
 async function getAll() {
   const response = await fetch(apiUrl, {
