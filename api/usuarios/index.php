@@ -18,16 +18,16 @@ switch ($_SERVER["REQUEST_METHOD"]) {
   case "POST":
     $data = file_get_contents("php://input");
     $usuarioArray = json_decode($data, true);
-    if (isset($usuarioArray["email"]) && isset($usuarioArray["password"])) {
+    if (isset($usuarioArray["id_empleado"])) {
+      $usuario = new UsuariosDto($usuarioArray);
+      echo $usuariosController->insert($usuario);
+    } else if (isset($usuarioArray["email"]) && isset($usuarioArray["password"])) {
       $response = $usuariosController->checkPassword($usuarioArray["email"], $usuarioArray["password"]);
       // echo json_encode($response);
       if ($response["checkPassword"] == true) {
         $_SESSION["user"] = json_encode($response["user"]);
       }
       echo json_encode(["checkPassword" => $response["checkPassword"]]);
-    } else {
-      $usuario = new UsuariosDto($usuarioArray);
-      echo $usuariosController->insert($usuario);
     }
     break;
 }
