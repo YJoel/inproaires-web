@@ -36,5 +36,19 @@ const hExtra = {
       },
       body: JSON.stringify(hextra),
     });
+
+    return await response.json();
+  },
+
+  delete: async function (id) {
+    const response = await fetch(this.apiUrl, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: id }),
+    });
+
+    return await response.json();
   },
 };

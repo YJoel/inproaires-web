@@ -26,7 +26,11 @@ class HExtrasController
     return $this->hextrasService->insert($hextra);
   }
 
-  public function update($id, $hextra) {
-    return $this->hextrasService->update($id, $hextra);
+  public function update($hextra) {
+    return $this->hextrasService->update($hextra);
+  }
+
+  public function delete($id) {
+    return $this->hextrasService->delete($id);
   }
 }

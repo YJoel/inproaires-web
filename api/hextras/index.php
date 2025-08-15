@@ -18,15 +18,17 @@ switch ($_SERVER["REQUEST_METHOD"]) {
     break;
   case "POST":
     $data = file_get_contents("php://input");
-    $extrasArray = json_decode($data, true);
-    $hextra = new HExtrasDto($extrasArray);
+    $hextra = json_decode($data);
     echo $hextrasController->insert($hextra);
     break;
   case "PUT":
     $data = file_get_contents("php://input");
-    $extrasArray = json_decode($data, true);
-    $id = $extrasArray["cedula"];
-    $hextra = new HExtrasDto($extrasArray["hextra"]);
-    echo $hextrasController->update($id, $hextra);
+    $hextra = json_decode($data);
+    echo $hextrasController->update($hextra);
+    break;
+  case "DELETE":
+    $data = file_get_contents("php://input");
+    $id = json_decode($data);
+    echo $hextrasController->delete($id->id);
     break;
 }

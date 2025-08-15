@@ -37,8 +37,18 @@ if (isset($_GET["logout"])) {
     rel="stylesheet" />
   <link href="./../css/sb-admin-2.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-  <link rel="stylesheet" href="https://cdn.datatables.net/2.3.2/css/dataTables.dataTables.css" />
   <link rel="stylesheet" href="./css/styles.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/2.3.2/css/dataTables.dataTables.css" />
+
+  <script src="empleados.js"></script>
+  <script src="hextras.js"></script>
+  <script>
+    async function dowloadDataFromDatabase() {
+      sessionStorage.setItem("empleados", JSON.stringify(await empleados.getAll()));
+      sessionStorage.setItem("hExtras", JSON.stringify(await hExtra.getAll()));
+    }
+    dowloadDataFromDatabase();
+  </script>
 </head>
 
 <body id="page-top">
@@ -314,6 +324,7 @@ if (isset($_GET["logout"])) {
                     </div>
                     <div class="row">
                       <div class="col py-2 px-3 my-3">
+                        <input type="hidden" name="method" id="method" value="POST">
                         <button type="submit" class="btn btn-primary" id="registrar" name="registrar">
                           Registrar Horas Extras
                         </button>
@@ -391,14 +402,16 @@ if (isset($_GET["logout"])) {
                   <table id="hExtras" class="display">
                     <thead>
                       <tr>
+                        <th>ID</th>
                         <th>Nombre</th>
                         <th>Cedula</th>
                         <th>Fecha</th>
-                        <th>Dia Semana</th>
-                        <th># horas Extras</th>
-                        <th>Horas diurnas</th>
-                        <th>Horas Nocturnas</th>
+                        <th>Dia</th>
+                        <th># Hrs Extras</th>
+                        <th>Diurnas</th>
+                        <th>Nocturnas</th>
                         <th>Festivo</th>
+                        <th>Opciones</th>
                       </tr>
                     </thead>
                   </table>
@@ -456,14 +469,115 @@ if (isset($_GET["logout"])) {
   </div>
 
   <div class="toast-container position-fixed bottom-0 end-0 p-3">
-    <div id="liveToast" class="toast bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
       <div class="toast-body text-white">
-        <i class="bi bi-check-circle-fill"></i> Horas extras registradas
+        <i class="bi bi-check-circle-fill"></i>
       </div>
     </div>
   </div>
 
-  <script src="./../vendor/jquery/jquery.min.js"></script>
+  <!-- ELIMINAR HORAS EXTRAS -->
+  <div class="modal fade" id="eliminarHorasExtras" tabindex="-1" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar Horas Extras</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-footer">
+          <form name="eliminar-horas-extras">
+            <input type="hidden" name="id" value="">
+            <input type="hidden" name="method" value="DELETE">
+            <input type="submit" id="eliminarHoraExtra" name="eliminarHoraExtra" style="display: none">
+          </form>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+            id="dismiss-eliminar">Cancelar</button>
+          <button type="button" class="btn btn-danger"
+            onclick="document.forms['eliminar-horas-extras']['eliminarHoraExtra'].click()">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDITAR HORAS EXTRAS -->
+  <div class="modal fade" id="editarHorasExtras" tabindex="-1" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Horas Extras</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form name="editar-horas-extras">
+            <div class="row">
+              <div class="col">
+                <div class="form-floating mb-3">
+                  <!-- <input type="number" class="form-control" id="cedula" name="cedula" placeholder="1234567890" required> -->
+                  <select class="form-select" name="cedula" id="cedula">
+                  </select>
+                  <label for="cedula">Empleado</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-floating">
+                  <select class="form-select" id="turnoTrabajo" name="turnoTrabajo"
+                    aria-label="Floating label select example">
+                    <option value="Hoteles">Hoteles</option>
+                    <option value="Clientes Ocasionales">Clientes Ocasionales</option>
+                  </select>
+                  <label for="floatingSelect">Seleccione su turno</label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="row">
+                  <div class="col">
+                    <input type="date" name="fecha" id="fecha" class="form-control mt-1 p-4" required>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col mx-4 py-2">
+                <input class="form-check-input" type="checkbox" value="" id="festivo" name="festivo">
+                <label class="form-check-label" for="checkDefault">
+                  Dia Festivo
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <div class="input-group mb-3">
+                  <span class="input-group-text">Hora de Inicio</span>
+                  <input type="time" class="form-control" name="hInicio" id="hInicio" required>
+                  <span class="input-group-text">Hora de Fin</span>
+                  <input type="time" class="form-control" name="hFin" id="hFin" required>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <input type="hidden" name="id" id="id" value="">
+                <input type="hidden" name="method" id="method" value="PUT">
+                <button type="submit" class="btn btn-primary" id="registrar" name="registrar" style="display: none">
+                  Registrar Horas Extras
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="dismiss-editar">Cancelar</button>
+          <button type="button" class="btn btn-success"
+            onclick="document.forms['editar-horas-extras']['registrar'].click()">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <script src="./../vendor/jquery/jquery.min.js"></script> -->
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
   <script src="./../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="./../vendor/jquery-easing/jquery.easing.min.js"></script>
   <script src="./../js/sb-admin-2.min.js"></script>
@@ -476,12 +590,12 @@ if (isset($_GET["logout"])) {
   <script src="https://cdn.datatables.net/2.3.2/js/dataTables.js"></script>
   <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   <script>
     const dominio = "www.inproaires.com.co";
   </script>
+
   <script src="utilities.js"></script>
-  <script src="empleados.js"></script>
-  <script src="hextras.js"></script>
   <script src="index.js"></script>
 </body>
 

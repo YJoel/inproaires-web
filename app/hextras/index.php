@@ -10,6 +10,15 @@
     integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="./css/styles.css">
+  <script src="./../dashboard/hextras/empleados.js"></script>
+  <script src="./../dashboard/hextras/hextras.js"></script>
+  <script>
+    async function dowloadDataFromDatabase() {
+      sessionStorage.setItem("empleados", JSON.stringify(await empleados.getAll()));
+      sessionStorage.setItem("hExtras", JSON.stringify(await hExtra.getAll()));
+    }
+    dowloadDataFromDatabase();
+  </script>
 </head>
 
 <body>
@@ -102,6 +111,7 @@
         </div>
         <div class="row">
           <div class="col py-2 px-3 my-3">
+            <input type="hidden" name="method" id="method" value="POST">
             <button type="submit" class="btn btn-success" id="registrar" name="registrar">
               Registrar Horas Extras
             </button>
@@ -128,8 +138,6 @@
   <script>
     const dominio = "www.inproaires.com.co";
   </script>
-  <script src="./../dashboard/hextras/empleados.js"></script>
-  <script src="./../dashboard/hextras/hextras.js"></script>
   <script src="./../dashboard/hextras/index.js"></script>
 </body>
 

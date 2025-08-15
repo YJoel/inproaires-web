@@ -55,7 +55,7 @@ class HExtrasService
   {
     $stmt = $this->conn->prepare(
       "INSERT INTO $this->dbTable VALUES
-      (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+      (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, null)"
     );
 
     $int = 0;
@@ -88,8 +88,62 @@ class HExtrasService
     ]);
   }
 
-  public function update($id, $hextra)
+  public function update($hextra)
   {
-    return;
+    $stmt = $this->conn->prepare(
+      "UPDATE $this->dbTable
+      SET cedula = ?, nombre = ?, fecha = ?, nHoras = ?,
+      diaSemana = ?, hNocturnas = ?, hDiurnas = ?, hInicio = ?,
+      hFin = ?, turno = ?, festivo = ? WHERE id = ?"
+    );
+
+    $stmt->bind_param(
+      "issisiissssi",
+      $hextra->cedula,
+      $hextra->nombre,
+      $hextra->fecha,
+      $hextra->nHoras,
+      $hextra->diaSemana,
+      $hextra->hNocturnas,
+      $hextra->hDiurnas,
+      $hextra->hInicio,
+      $hextra->hFin,
+      $hextra->turno,
+      $hextra->festivo,
+      $hextra->id
+    );
+
+    if (!$stmt->execute()) {
+      $stmt->close();
+      return json_encode([
+        "error" => 1,
+        "message" => "fallo al insertar el registro"
+      ]);
+    }
+    $stmt->close();
+    return json_encode([
+      "error" => 0,
+      "message" => "registro insertado con éxito"
+    ]);
+  }
+
+  public function delete($id)
+  {
+    $stmt = $this->conn->prepare("DELETE FROM $this->dbTable WHERE id = ?");
+
+    $stmt->bind_param("i", $id);
+
+    if (!$stmt->execute()) {
+      $stmt->close();
+      return json_encode([
+        "error" => 1,
+        "message" => "fallo al eliminar el registro"
+      ]);
+    }
+    $stmt->close();
+    return json_encode([
+      "error" => 0,
+      "message" => "registro eliminado con éxito"
+    ]);
   }
 }

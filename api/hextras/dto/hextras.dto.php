@@ -13,6 +13,7 @@ class HExtrasDto
   public string $diaSemana;
   public string $turno;
   public string $festivo;
+  public int $id;
 
   public function __construct($hextra)
   {
@@ -27,6 +28,11 @@ class HExtrasDto
     $this->hFin = $hextra["hFin"];
     $this->turno = $hextra["turno"];
     $this->festivo = $hextra["festivo"];
+    if ($hextra["id"] == null) {
+      $this->id = 0;
+    } else {
+      $this->id = $hextra["id"];
+    }
   }
 
 }

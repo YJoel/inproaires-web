@@ -1,13 +1,16 @@
 let ctx = undefined;
+/**
+ *
+ */
+let table = {};
 
-async function runGraphics() {
+function runGraphics() {
   const empleados = JSON.parse(sessionStorage.getItem("empleados"));
-  const dataHoras = await hExtra.getAll();
-  sessionStorage.setItem("hExtras", JSON.stringify(dataHoras));
+  const dataHoras = JSON.parse(sessionStorage.getItem("hExtras"));
   // console.log(dataHoras, empleados);
 
   const { labels, horasValues } = horasTotales("", empleados, dataHoras);
-  console.log(labels, horasValues);
+  // console.log(labels, horasValues);
 
   ctx = new Chart("horasTotales", {
     type: "bar",
@@ -49,24 +52,52 @@ function horasTotales(mes = "", empleados, dataHoras) {
   return { labels, horasValues };
 }
 
-async function loadDataTable() {
-  console.log();
-  const hExtras = JSON.parse(sessionStorage.getItem("hExtras"));
-  console.log(hExtras);
-  $("#hExtras").DataTable({
+function loadDataTable() {
+  // console.log();
+  let hExtras = JSON.parse(sessionStorage.getItem("hExtras"));
+  hExtras = hExtras.map((el, index, array) => {
+    array[index]["options"] = `
+      <button type="button" class="btn btn-outline-info"data-bs-toggle="modal" data-bs-target="#editarHorasExtras">
+        <i class="bi bi-pencil-square" onclick="completarFormularioEditar(${el.id})"></i>
+      </button>
+      <button type="button" class="btn btn-outline-danger"data-bs-toggle="modal" data-bs-target="#eliminarHorasExtras">
+        <i class="bi bi-trash3-fill" onclick="completarFormularioEliminar(${el.id})"></i>
+      </button>
+    `;
+    return el;
+  });
+  // console.log(hExtras);
+  table = $("#hExtras").DataTable({
     // display: ["stripe"],
     // compact: true,
     data: hExtras,
-    order: [[2, "desc"]], // Ordena por la tercera columna (índice 2) en orden descendente
+    order: [[3, "desc"]], // Ordena por la tercera columna (índice 2) en orden descendente
     columns: [
+      { data: "id" },
       { data: "nombre" },
       { data: "cedula" },
       { data: "fecha" },
       { data: "diaSemana" },
-      { data: "nHoras" },
-      { data: "hDiurnas" },
-      { data: "hNocturnas" },
+      {
+        data: "nHoras",
+        render: (data, type, row) => {
+          return `${data}h`;
+        },
+      },
+      {
+        data: "hDiurnas",
+        render: (data, type, row) => {
+          return `${data}h`;
+        },
+      },
+      {
+        data: "hNocturnas",
+        render: (data, type, row) => {
+          return `${data}h`;
+        },
+      },
       { data: "festivo" },
+      { data: "options" },
     ],
   });
 }
@@ -91,14 +122,14 @@ function filtrarPorMes(fechaStr = "", hExtras) {
   return hExtras.filter((h) => h.fecha.search(fechaStr) >= 0);
 }
 
-async function actualizarTabla(e) {
+function actualizarTabla(e) {
   const dataHoras = JSON.parse(sessionStorage.getItem("hExtras"));
   const empleados = JSON.parse(sessionStorage.getItem("empleados"));
   // console.log(e.value);
   // const filtroHoras = filtrarPorMes(e.value, dataHoras);
   const { labels, horasValues } = horasTotales(e.value, empleados, dataHoras);
-  console.log(filtroMes);
-  console.log(horasValues);
+  // console.log(filtroMes);
+  // console.log(horasValues);
   ctx.data.datasets[0] = {
     label: "# de horas",
     data: horasValues,
