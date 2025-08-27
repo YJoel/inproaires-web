@@ -13,7 +13,7 @@ class HExtrasService
 
   public function getAll()
   {
-    $stmt = $this->conn->prepare("SELECT * FROM $this->dbTable");
+    $stmt = $this->conn->prepare("SELECT h.id, h.nombre, h.cedula, h.fecha, h.diaSemana, h.nHoras, h.hNocturnas, h.hDiurnas, h.hInicio, h.hFin, h.turno, h.festivo FROM $this->dbTable h, empleados e WHERE e.active = 1 and h.cedula = e.cedula");
     $stmt->execute();
     $result = $stmt->get_result();
 

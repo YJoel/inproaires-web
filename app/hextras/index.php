@@ -11,13 +11,10 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="./css/styles.css">
   <script src="./../dashboard/hextras/empleados.js"></script>
-  <script src="./../dashboard/hextras/hextras.js"></script>
   <script>
     async function dowloadDataFromDatabase() {
       sessionStorage.setItem("empleados", JSON.stringify(await empleados.getAll()));
-      sessionStorage.setItem("hExtras", JSON.stringify(await hExtra.getAll()));
     }
-    dowloadDataFromDatabase();
   </script>
 </head>
 
@@ -135,9 +132,6 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.min.js"
     integrity="sha384-7qAoOXltbVP82dhxHAUje59V5r2YsVfBafyUDxEdApLPmcdhBPg1DKg1ERo0BZlK"
     crossorigin="anonymous"></script>
-  <script>
-    const dominio = "www.inproaires.com.co";
-  </script>
   <script src="./../dashboard/hextras/index.js"></script>
 </body>
 

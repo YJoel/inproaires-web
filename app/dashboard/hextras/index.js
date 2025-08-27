@@ -278,15 +278,14 @@ function cargarFecha() {
 }
 
 async function cargarUI() {
-  // console.log("Event", this);
   try {
-    // await dowloadDataFromDatabase();
+    await dowloadDataFromDatabase();
     cargarEmpleados();
     cargarFecha();
     runGraphics();
     loadDataTable();
   } catch (error) {
-    // console.log(error);
+    console.log(error);
   }
 }
 

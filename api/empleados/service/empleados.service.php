@@ -13,7 +13,7 @@ class EmpleadosService
 
   public function getAll()
   {
-    $stmt = $this->conn->prepare("SELECT * FROM $this->dbTable");
+    $stmt = $this->conn->prepare("SELECT * FROM $this->dbTable WHERE active = 1");
     $stmt->execute();
     $result = $stmt->get_result();
 

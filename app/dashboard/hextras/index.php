@@ -47,7 +47,6 @@ if (isset($_GET["logout"])) {
       sessionStorage.setItem("empleados", JSON.stringify(await empleados.getAll()));
       sessionStorage.setItem("hExtras", JSON.stringify(await hExtra.getAll()));
     }
-    dowloadDataFromDatabase();
   </script>
 </head>
 
@@ -590,13 +589,8 @@ if (isset($_GET["logout"])) {
   <script src="https://cdn.datatables.net/2.3.2/js/dataTables.js"></script>
   <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-  <script>
-    const dominio = "www.inproaires.com.co";
-  </script>
-
-  <script src="utilities.js"></script>
-  <script src="index.js"></script>
+  <script async src="utilities.js"></script>
+  <script async src="index.js"></script>
 </body>
 
 </html>
