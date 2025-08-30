@@ -117,13 +117,13 @@ class HExtrasService
       $stmt->close();
       return json_encode([
         "error" => 1,
-        "message" => "fallo al insertar el registro"
+        "message" => "fallo al editar el registro"
       ]);
     }
     $stmt->close();
     return json_encode([
       "error" => 0,
-      "message" => "registro insertado con éxito"
+      "message" => "registro editado con éxito"
     ]);
   }
 

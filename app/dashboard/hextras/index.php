@@ -38,7 +38,6 @@ if (isset($_GET["logout"])) {
   <link href="./../css/sb-admin-2.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="./css/styles.css">
-  <link rel="stylesheet" href="https://cdn.datatables.net/2.3.2/css/dataTables.dataTables.css" />
 
   <script src="empleados.js"></script>
   <script src="hextras.js"></script>
@@ -260,10 +259,11 @@ if (isset($_GET["logout"])) {
         <div class="container-fluid">
           <div class="row d-flex my-2">
             <div class="col">
-
+              <h5 style="border-bottom: 1px solid lightgray">
+                GESTION DE HORAS EXTRAS
+              </h5>
             </div>
           </div>
-          <hr>
           <div class="row">
             <div class="col">
               <div class="card shadow mb-4">
@@ -393,8 +393,13 @@ if (isset($_GET["logout"])) {
           </div>
           <div class="row">
             <div class="col">
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
               <div class="card shadow mb-4">
-                <div class="card-header py-3">
+                <div class="card-header">
                   <h6 class="m-0 p-2 font-weight-bold text-primary">Listado de Horas Extras</h6>
                 </div>
                 <div class="card-body">
@@ -435,8 +440,6 @@ if (isset($_GET["logout"])) {
 
   </div>
   <!-- End of Content Wrapper -->
-  </div>
-  <!-- End of Page Wrapper -->
 
   <!-- Scroll to Top Button-->
   <a class="scroll-to-top rounded" href="#page-top">
@@ -468,9 +471,14 @@ if (isset($_GET["logout"])) {
   </div>
 
   <div class="toast-container position-fixed bottom-0 end-0 p-3">
-    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-      <div class="toast-body text-white">
-        <i class="bi bi-check-circle-fill"></i>
+    <div id="liveToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive"
+      aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body">
+          Hello, world! This is a toast message.
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+          aria-label="Close"></button>
       </div>
     </div>
   </div>
@@ -575,6 +583,57 @@ if (isset($_GET["logout"])) {
     </div>
   </div>
 
+  <!-- BUTTON TRIGGER MODAL DE HORAS EXTRAS POR EMPLEADO -->
+  <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#registroHorasEmpleado" id="defaultButton"
+    style="display:none"></button>
+  <!-- MODAL REGISTRO DE HORAS EXTRAS POR EMPLEADO -->
+  <div class="modal fade" id="registroHorasEmpleado" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col">
+              <div class="card shadow mb-4">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <table id="hExtrasEmpleado" class="display compact">
+                        <thead>
+                          <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Cedula</th>
+                            <th>Fecha</th>
+                            <th>Dia</th>
+                            <th># Hrs Extras</th>
+                            <th>Diurnas</th>
+                            <th>Nocturnas</th>
+                            <th>Festivo</th>
+                            <th>Opciones</th>
+                          </tr>
+                        </thead>
+                      </table>
+                    </div>
+                    <!-- <div class="col"></div> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- <script src="./../vendor/jquery/jquery.min.js"></script> -->
   <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
   <script src="./../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -586,9 +645,44 @@ if (isset($_GET["logout"])) {
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.min.js"
     integrity="sha384-7qAoOXltbVP82dhxHAUje59V5r2YsVfBafyUDxEdApLPmcdhBPg1DKg1ERo0BZlK"
     crossorigin="anonymous"></script>
-  <script src="https://cdn.datatables.net/2.3.2/js/dataTables.js"></script>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+  <!-- DataTables core -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css">
+  <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+
+
+  <!-- ColumnControl -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/column-control/1.0.0/css/columnControl.dataTables.min.css">
+  <script src="https://cdn.datatables.net/column-control/1.0.0/js/dataTables.columnControl.min.js"></script>
+
+  <!-- DateTime para SearchBuilder -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/datetime/1.4.0/css/dataTables.dateTime.min.css">
+  <script src="https://cdn.datatables.net/datetime/1.4.0/js/dataTables.dateTime.min.js"></script>
+
+  <!-- SearchBuilder -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/searchbuilder/1.6.0/css/searchBuilder.dataTables.min.css">
+  <script src="https://cdn.datatables.net/searchbuilder/1.6.0/js/dataTables.searchBuilder.min.js"></script>
+
+  <!-- Buttons extension -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+  <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+
+  <!-- JSZip para Excel -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+  <!-- pdfmake para PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
+  <!-- Otros scripts -->
   <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   <script async src="utilities.js"></script>
   <script async src="index.js"></script>
 </body>

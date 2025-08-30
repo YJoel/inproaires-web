@@ -10,11 +10,13 @@ const diasSemana = [
   "Domingo",
 ];
 
-const toastTrigger = document.getElementById("registrar");
+// const toastTrigger = document.getElementById("registrar");
 const toastLiveExample = document.getElementById("liveToast");
-let toastBootstrap = "";
-if (toastTrigger) {
-  toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
+const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample);
+function mostrarMensage(mensaje, fondo) {
+  toastLiveExample.querySelector(".toast-body").innerHTML = mensaje;
+  toastLiveExample.classList = `toast align-items-center text-bg-${fondo} border-0`;
+  toastBootstrap.show();
 }
 
 async function calcularHorasExtras(ev) {
@@ -165,12 +167,7 @@ async function calcularHorasExtras(ev) {
 
       if (result.error == 0) {
         let id = form["id"].value;
-        toastLiveExample.classList = "toast bg-success";
-        toastLiveExample.innerHTML = `
-          <div class="toast-body text-white">
-            <i class="bi bi-check-circle-fill"></i> Horas extras registradas, actualice la página para visualizar los cambios
-          </div>
-        `;
+
         switch (form["method"].value) {
           case "PUT":
             table.rows().every(function () {
@@ -181,7 +178,7 @@ async function calcularHorasExtras(ev) {
                 data.cedula = hextra.cedula;
                 data.fecha = hextra.fecha;
                 data.diaSemana = hextra.diaSemana;
-                data.nHoras = hextra.diaSemana;
+                data.nHoras = hextra.nHoras;
                 data.hDiurnas = hextra.hDiurnas;
                 data.hNocturnas = hextra.hNocturnas;
                 data.festivo = hextra.festivo;
@@ -196,6 +193,8 @@ async function calcularHorasExtras(ev) {
             }, 1000);
             break;
         }
+
+        mostrarMensage(result.message, "success");
       } else {
         // console.log(result.error);
         throw new Error(
@@ -203,12 +202,10 @@ async function calcularHorasExtras(ev) {
         );
       }
     } catch (error) {
-      toastLiveExample.classList = "toast bg-danger";
-      toastLiveExample.innerHTML = `
-      <div class="toast-body text-white">
-        <i class="bi bi-database-fill-slash"></i> Error al ingresar horas extras, actualice la página e intente nuevamente
-      </div>
-    `;
+      mostrarMensage(
+        "Error al ingresar horas extras, actualice la página e intente nuevamente",
+        "danger"
+      );
       // alert(error);
       // console.log(error);
     }
@@ -218,32 +215,29 @@ async function calcularHorasExtras(ev) {
       let result = await hExtra.delete(id);
       // console.log(result);
       if (result.error == 0) {
-        toastLiveExample.classList = "toast bg-success";
-        toastLiveExample.innerHTML = `
-          <div class="toast-body text-white">
-            <i class="bi bi-x-circle-fill"></i> Registro eliminado correctamente!!
-          </div>
-        `;
+        mostrarMensage(result.message, "success");
         table.rows().every(function () {
           let data = this.data();
           if (data.id == id) {
             this.remove();
           }
         });
+        try {
+          table1.rows().every(function () {
+            let data = this.data();
+            if (data.id == id) {
+              this.remove();
+            }
+          });
+        } catch (error) {}
+
         table.draw();
         document.querySelector("#dismiss-eliminar").click();
       }
     } catch (error) {
-      toastLiveExample.classList = "toast bg-danger";
-      toastLiveExample.innerHTML = `
-        <div class="toast-body text-white">
-          <i class="bi bi-database-fill-slash"></i> No se pudo eliminar el registro!!
-        </div>
-      `;
+      mostrarMensage(error, "danger");
     }
   }
-
-  toastBootstrap.show();
   // form.reset();
   cargarFecha();
 }
@@ -260,13 +254,7 @@ function cargarEmpleados() {
       // select2.innerHTML += `<option value="${em.cedula}">${em.nombre}</option>`;
     });
   } catch (error) {
-    toastLiveExample.classList = "toast bg-danger";
-    toastLiveExample.innerHTML = `
-      <div class="toast-body text-white">
-        <i class="bi bi-database-fill-slash"></i> No se pudo conectar a la base de datos
-      </div>
-    `;
-    toastBootstrap.show();
+    mostrarMensage("No se pudo conectar a la base de datos", "danger");
   }
 }
 
@@ -295,38 +283,6 @@ try {
   formEditar.addEventListener("submit", calcularHorasExtras);
   formEliminar.addEventListener("submit", calcularHorasExtras);
 } catch (error) {}
-
-/**
- *
- * @param {string} id
- */
-
-function completarFormularioEditar(id) {
-  let empleados = JSON.parse(sessionStorage.getItem("empleados"));
-  let hExtra = JSON.parse(sessionStorage.getItem("hExtras")).find(
-    (h) => h.id == id
-  );
-  let select = formEditar["cedula"];
-  select.innerHTML = "";
-  empleados.forEach((em) => {
-    if (em.cedula == hExtra.cedula) {
-      select.innerHTML += `<option value="${em.cedula}" selected>${em.nombre}</option>`;
-    } else {
-      select.innerHTML += `<option value="${em.cedula}">${em.nombre}</option>`;
-    }
-  });
-
-  formEditar["turnoTrabajo"].value = hExtra.turno;
-  formEditar["fecha"].value = hExtra.fecha;
-  formEditar["festivo"].checked = hExtra.festivo == "SI" ? true : false;
-  formEditar["hInicio"].value = hExtra.hInicio;
-  formEditar["hFin"].value = hExtra.hFin;
-  formEditar["id"].value = hExtra.id;
-}
-
-function completarFormularioEliminar(id) {
-  formEliminar["id"].value = id;
-}
 
 document.body.addEventListener("load", cargarUI());
 
