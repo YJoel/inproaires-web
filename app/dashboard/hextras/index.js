@@ -185,6 +185,13 @@ async function calcularHorasExtras(ev) {
                 this.data(data).draw();
               }
             });
+            const dataHoras = JSON.parse(sessionStorage.getItem("hExtras"));
+            dataHoras.forEach((el, i, arr) => {
+              if (arr[i].id == hextra.id) {
+                arr[i] = hextra;
+              }
+            });
+            sessionStorage.setItem("hExtras", JSON.stringify(dataHoras));
             document.querySelector("#dismiss-editar").click();
             break;
           case "POST":
@@ -197,15 +204,10 @@ async function calcularHorasExtras(ev) {
         mostrarMensage(result.message, "success");
       } else {
         // console.log(result.error);
-        throw new Error(
-          "Error al ingresar horas extras, actualice la página e intente nuevamente"
-        );
+        throw new Error(result.message);
       }
     } catch (error) {
-      mostrarMensage(
-        "Error al ingresar horas extras, actualice la página e intente nuevamente",
-        "danger"
-      );
+      mostrarMensage(error, "danger");
       // alert(error);
       // console.log(error);
     }
