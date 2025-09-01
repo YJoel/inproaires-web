@@ -393,7 +393,20 @@ if (isset($_GET["logout"])) {
           </div>
           <div class="row">
             <div class="col">
+              <div class="card shadow mb-4">
+                <div class="card-header">
+                  <div class="row">
+                    <div class="col">
+                      <h6 class="m-0 p-2 font-weight-bold text-primary">Empleados</h6>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="row justify-content-md-left" id="divEmpleados">
 
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="row">

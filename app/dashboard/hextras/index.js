@@ -250,10 +250,23 @@ function cargarEmpleados() {
   try {
     const select = form["cedula"];
     const arrayEmpleados = JSON.parse(sessionStorage.getItem("empleados"));
+    const divEmpledos = document.getElementById("divEmpleados");
+    const button = document.getElementById("defaultButton");
 
+    arrayEmpleados.sort((a, b) => {
+      return a.nombre.localeCompare(b.nombre);
+    });
     arrayEmpleados.forEach((em) => {
-      select.innerHTML += `<option value="${em.cedula}">${em.nombre}</option>`;
-      // select2.innerHTML += `<option value="${em.cedula}">${em.nombre}</option>`;
+      if (em.nombre.search("JORGE BERTEL") == -1) {
+        select.innerHTML += `<option value="${em.cedula}">${em.nombre}</option>`;
+      }
+      if (divEmpledos) {
+        divEmpledos.innerHTML += `<div class="col my-1">
+          <button type="button" style="aspect-ratio: 16/9; width: 7rem;" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#registroHorasEmpleado" data-bs-whatever="${em.nombre}">
+            ${em.nombre}
+          </button>
+        </div>`;
+      }
     });
   } catch (error) {
     mostrarMensage("No se pudo conectar a la base de datos", "danger");

@@ -43,72 +43,11 @@ function runGraphics() {
         if (element.length > 0) {
           const index = element[0].index;
           const nombreEmpleado = ctx.data.labels[index];
-          const data = ctx.data.datasets[0].data;
+          // const data = ctx.data.datasets[0].data;
           // const horas = data[index];
 
-          let hExtras = dataHoras.filter(
-            (el) => el.nombre.search(nombreEmpleado) != -1
-          );
-          hExtras = hExtras.map((el, index, array) => {
-            array[index]["options"] = `
-              <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#editarHorasExtras" id="editar_${el.id}">
-                <i class="bi bi-pencil-square"></i>
-              </button>
-              <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#eliminarHorasExtras" id="eliminar_${el.id}">
-                <i class="bi bi-trash3-fill"></i>
-              </button>
-            `;
-            return el;
-          });
-
-          button.setAttribute("data-bs-whatever", hExtras[0].nombre);
+          button.setAttribute("data-bs-whatever", nombreEmpleado);
           button.click();
-
-          setTimeout(function () {
-            if (table1) {
-              // Vaciar la tabla
-              table1.clear();
-              // Asignar nuevos datos
-              table1.rows.add(hExtras);
-              // Redibujar
-              table1.draw();
-            } else {
-              table1 = $("#hExtrasEmpleado").DataTable({
-                data: hExtras,
-                // compact: true,
-                responsive: true,
-                dom: "lBfrtip",
-                order: [[0, "desc"]], // Ordena por la tercera columna (índice 2) en orden descendente
-                columns: [
-                  { data: "id" },
-                  { data: "nombre" },
-                  { data: "cedula" },
-                  { data: "fecha" },
-                  { data: "diaSemana" },
-                  {
-                    data: "nHoras",
-                    render: (data, type, row) => {
-                      return `${data}h`;
-                    },
-                  },
-                  {
-                    data: "hDiurnas",
-                    render: (data, type, row) => {
-                      return `${data}h`;
-                    },
-                  },
-                  {
-                    data: "hNocturnas",
-                    render: (data, type, row) => {
-                      return `${data}h`;
-                    },
-                  },
-                  { data: "festivo" },
-                  { data: "options" },
-                ],
-              });
-            }
-          }, 200);
         }
       },
     },
@@ -119,12 +58,69 @@ document
   .getElementById("registroHorasEmpleado")
   .addEventListener("show.bs.modal", (ev) => {
     const button = ev.relatedTarget;
-
     const em = button.getAttribute("data-bs-whatever");
-    console.log(em);
-
+    const dataHoras = JSON.parse(sessionStorage.getItem("hExtras"));
     const modalTitle = ev.target.querySelector(".modal-title");
     modalTitle.innerHTML = `Horas Extras Empleado: ${em}`;
+
+    let hExtras = dataHoras.filter((el) => el.nombre.search(em) != -1);
+    hExtras = hExtras.map((el, index, array) => {
+      array[index]["options"] = `
+        <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#editarHorasExtras" id="editar_${el.id}">
+          <i class="bi bi-pencil-square"></i>
+        </button>
+        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#eliminarHorasExtras" id="eliminar_${el.id}">
+          <i class="bi bi-trash3-fill"></i>
+        </button>
+      `;
+      return el;
+    });
+
+    setTimeout(function () {
+      if (table1) {
+        // Vaciar la tabla
+        table1.clear();
+        // Asignar nuevos datos
+        table1.rows.add(hExtras);
+        // Redibujar
+        table1.draw();
+      } else {
+        table1 = $("#hExtrasEmpleado").DataTable({
+          data: hExtras,
+          // compact: true,
+          responsive: true,
+          dom: "lBfrtip",
+          order: [[0, "desc"]], // Ordena por la tercera columna (índice 2) en orden descendente
+          columns: [
+            { data: "id" },
+            { data: "nombre" },
+            { data: "cedula" },
+            { data: "fecha" },
+            { data: "diaSemana" },
+            {
+              data: "nHoras",
+              render: (data, type, row) => {
+                return `${data}h`;
+              },
+            },
+            {
+              data: "hDiurnas",
+              render: (data, type, row) => {
+                return `${data}h`;
+              },
+            },
+            {
+              data: "hNocturnas",
+              render: (data, type, row) => {
+                return `${data}h`;
+              },
+            },
+            { data: "festivo" },
+            { data: "options" },
+          ],
+        });
+      }
+    }, 200);
   });
 
 function horasTotales(mes = "", empleados, dataHoras) {
@@ -277,24 +273,6 @@ function loadDataTable() {
       { data: "options" },
     ],
   });
-
-  // setTimeout(() => {
-  //   $(".btn-export-excel")
-  //     .attr("data-bs-toggle", "tooltip")
-  //     .attr("title", "Exportar datos filtrados a Excel")
-  //     .attr('data-bs-custom-class', 'tooltip-gris');
-
-  //   $(".btn-export-csv")
-  //     .attr("data-bs-toggle", "tooltip")
-  //     .attr("title", "Exportar datos filtrados a CSV")
-  //     .attr('data-bs-custom-class', 'tooltip-gris');
-
-  //   // Inicializa los tooltips
-  //   const tooltipTriggerList = document.querySelectorAll(
-  //     '[data-bs-toggle="tooltip"]'
-  //   );
-  //   tooltipTriggerList.forEach((el) => new bootstrap.Tooltip(el));
-  // }, 100); // Ajusta el delay si es necesario
 }
 
 /**
@@ -312,19 +290,15 @@ function filtrarPorMes(fechaStr = "", hExtras) {
     }`;
   }
 
-  // consolelog()
-  // console.log(fechaStr, hExtras);
   return hExtras.filter((h) => h.fecha.search(fechaStr) >= 0);
 }
 
 function actualizarTabla(e) {
   const dataHoras = JSON.parse(sessionStorage.getItem("hExtras"));
   const empleados = JSON.parse(sessionStorage.getItem("empleados"));
-  // console.log(e.value);
-  // const filtroHoras = filtrarPorMes(e.value, dataHoras);
+
   const { labels, horasValues } = horasTotales(e.value, empleados, dataHoras);
-  // console.log(filtroMes);
-  // console.log(horasValues);
+
   ctx.data.datasets[0] = {
     label: "# de horas",
     data: horasValues,
@@ -340,12 +314,10 @@ async function bajarReporte(ev) {
   let mes = document.forms["reporte"]["mes"].value;
   const hExtras = JSON.parse(sessionStorage.getItem("hExtras"));
 
-  // console.log(hExtras);
   let filtroMes = hExtras.filter((el) => {
     return el.fecha.search(mes) != -1;
   });
 
-  // console.log(filtroMes);
   exportarXLSX(filtroMes);
 }
 
