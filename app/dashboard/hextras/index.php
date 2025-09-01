@@ -602,7 +602,7 @@ if (isset($_GET["logout"])) {
   <!-- MODAL REGISTRO DE HORAS EXTRAS POR EMPLEADO -->
   <div class="modal fade" id="registroHorasEmpleado" tabindex="-1" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-xl">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
