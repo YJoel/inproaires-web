@@ -364,7 +364,6 @@ if (isset($_GET["logout"])) {
               </div>
               <div class="row">
                 <div class="col">
-                  <!-- <h4>ESTADISTICAS</h4> -->
                   <div class="card shadow mb-4">
                     <div class="card-header py-3">
                       <div class="row">
@@ -372,7 +371,8 @@ if (isset($_GET["logout"])) {
                           <h6 class="m-2 font-weight-bold text-primary">Horas Totales por trabajador</h6>
                         </div>
                         <div class="col">
-                          <input type="month" class="form-control" name="filtroMes" id="filtroMes" onchange="actualizarGrafica(this)">
+                          <input type="month" class="form-control" name="filtroMes" id="filtroMes"
+                            onchange="actualizarGrafica(this)">
                         </div>
                       </div>
                     </div>
@@ -399,16 +399,6 @@ if (isset($_GET["logout"])) {
                 <div class="card-body">
                   <div class="row">
                     <div class="col">
-                      <div class="form-floating mb-3">
-                        <select class="form-select" name="cedula" id="cedula2" onchange="actualizarTabla(this)">
-                          <option value="0">TODOS</option>
-                        </select>
-                        <label for="cedula">Empleado</label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col">
                       <table id="hExtras" class="display">
                         <thead>
                           <tr>
@@ -426,9 +416,7 @@ if (isset($_GET["logout"])) {
                         </thead>
                       </table>
                     </div>
-
                   </div>
-
                 </div>
               </div>
             </div>
@@ -655,28 +643,22 @@ if (isset($_GET["logout"])) {
     integrity="sha384-7qAoOXltbVP82dhxHAUje59V5r2YsVfBafyUDxEdApLPmcdhBPg1DKg1ERo0BZlK"
     crossorigin="anonymous"></script>
 
-  <!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
   <!-- DataTables core -->
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css">
-  <script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/2.3.3/css/dataTables.dataTables.min.css">
+  <script src="https://cdn.datatables.net/2.3.3/js/dataTables.min.js"></script>
 
+  <!-- Responsive -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.6/css/responsive.dataTables.min.css">
+  <script src="https://cdn.datatables.net/responsive/3.0.6/js/dataTables.responsive.min.js"></script>
 
   <!-- ColumnControl -->
-  <link rel="stylesheet" href="https://cdn.datatables.net/column-control/1.0.0/css/columnControl.dataTables.min.css">
-  <script src="https://cdn.datatables.net/column-control/1.0.0/js/dataTables.columnControl.min.js"></script>
-
-  <!-- DateTime para SearchBuilder -->
-  <link rel="stylesheet" href="https://cdn.datatables.net/datetime/1.4.0/css/dataTables.dateTime.min.css">
-  <script src="https://cdn.datatables.net/datetime/1.4.0/js/dataTables.dateTime.min.js"></script>
-
-  <!-- SearchBuilder -->
-  <link rel="stylesheet" href="https://cdn.datatables.net/searchbuilder/1.6.0/css/searchBuilder.dataTables.min.css">
-  <script src="https://cdn.datatables.net/searchbuilder/1.6.0/js/dataTables.searchBuilder.min.js"></script>
+  <link href="https://cdn.datatables.net/columncontrol/1.0.7/css/columnControl.dataTables.min.css" rel="stylesheet">
+  <script src="https://cdn.datatables.net/columncontrol/1.0.7/js/dataTables.columnControl.min.js"></script>
 
   <!-- Buttons extension -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.2.4/css/buttons.dataTables.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+  <script src="https://cdn.datatables.net/buttons/3.2.4/js/dataTables.buttons.min.js"></script>
   <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
   <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
   <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>

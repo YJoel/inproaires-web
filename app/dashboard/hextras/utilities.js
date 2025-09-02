@@ -200,50 +200,36 @@ function loadDataTable() {
     return el;
   });
   // console.log(hExtras);
-  table = $("#hExtras").DataTable({
+  table = new DataTable("#hExtras", {
     data: hExtras,
-    // display: ["columnControl", "searchBuilder", "buttons"],
-    // compact: true,
-    // columnControl: {
-    //   layout: "dropdown", // o 'inline' si prefieres que aparezca directamente
-    //   controls: ["searchText", "orderAsc", "orderDesc", "orderClear"],
-    // },
-    responsive: true, // Adaptación a dispositivos móviles
-    // autoWidth: false, // Evita que calcule ancho automáticamente
-    dom: "lBfrtip", // B = Buttons, C = ColumnControl, Q = SearchBuilder, etc.
-    searchBuilder: true,
     columnDefs: [
-      { targets: "_all", control: true },
-      { targets: "_all", orderable: true },
+      // {
+      //   targets: [0, 2, 3, 4, 5, 6, 7, 8, 9],
+      //   columnControl: [
+      //     "order",
+      //     // ["searchList", "spacer", "orderAsc", "orderDesc", "orderClear"],
+      //   ],
+      //   ordering: {
+      //     indicators: false,
+      //   },
+      // },
+      {
+        targets: [1],
+        columnControl: [
+          // "order",
+          ["searchList"],
+        ],
+      },
     ],
-    // buttons: ["csv", "excel"],
-    // buttons: [
-    //   {
-    //     extend: "csvHtml5",
-    //     text: "Exportar CSV",
-    //     className: "btn-export-csv",
-    //     exportOptions: {
-    //       // columns: ":all", // Incluye todas las columnas, visibles o no
-    //       modifier: {
-    //         search: "applied", // Solo datos filtrados
-    //         page: "all", // Ignora la paginación
-    //       },
-    //     },
-    //   },
-    //   {
-    //     extend: "excelHtml5",
-    //     text: "Exportar Excel",
-    //     className: "btn-export-excel",
-    //     exportOptions: {
-    //       // columns: ":all", // Incluye todas las columnas, visibles o no
-    //       modifier: {
-    //         search: "applied", // Solo datos filtrados
-    //         page: "all", // Ignora la paginación
-    //       },
-    //     },
-    //   },
-    // ],
-
+    buttons: ["copy", "csv", "excel", "pdf", "print"],
+    layout: {
+      // topEnd: 'search',
+      topStart: ["pageLength", "buttons"],
+    },
+    responsive: true,
+    // ordering: {
+    //   indicators: true,
+    // },
     order: [[0, "desc"]], // Ordena por la tercera columna (índice 2) en orden descendente
     columns: [
       { data: "id" },
