@@ -33,10 +33,56 @@ async function calcularHorasExtras(ev) {
       return f;
     };
 
+    function obtenerJornadaPorDia(fechaStr, tipoJornada, festivo) {
+      const diaSemana = fechaStr.getDay();
+      // const fechaStr = fecha.toISOString().split("T")[0];
+      // console.log(diaSemana);
+      if (diaSemana === 6 || festivo) {
+        return []; // Domingo o festivo
+      }
+
+      if (diaSemana === 5) {
+        return [
+          [
+            convertirTiempo(fechaStr, "08:00"),
+            convertirTiempo(fechaStr, "13:00"),
+          ],
+        ];
+      }
+
+      if (tipoJornada === "Hoteles") {
+        return [
+          [
+            convertirTiempo(fechaStr, "08:00"),
+            convertirTiempo(fechaStr, "12:00"),
+          ],
+          [
+            convertirTiempo(fechaStr, "13:00"),
+            convertirTiempo(fechaStr, "17:00"),
+          ],
+        ];
+      }
+
+      if (tipoJornada === "Clientes Ocasionales") {
+        return [
+          [
+            convertirTiempo(fechaStr, "08:00"),
+            convertirTiempo(fechaStr, "12:00"),
+          ],
+          [
+            convertirTiempo(fechaStr, "14:00"),
+            convertirTiempo(fechaStr, "18:00"),
+          ],
+        ];
+      }
+
+      throw new Error("Tipo de jornada no válida");
+    }
+
     try {
       const fechaStr = form["fecha"].value; // formato esperado: "YYYY-MM-DD"
       const diaSemana = new Date(fechaStr).getDay(); // 0 = domingo, 6 = sábado
-
+      // console.log(diaSemana);
       let entradaStr = form["hInicio"].value;
       let salidaStr = form["hFin"].value;
       let tipoJornada = form["turnoTrabajo"].value;
@@ -44,82 +90,42 @@ async function calcularHorasExtras(ev) {
       const entrada = convertirTiempo(fechaStr, entradaStr);
       const salida = convertirTiempo(fechaStr, salidaStr);
 
-      let jornada;
+      // let jornada;
 
       if (entrada > salida) {
-        salida.setDate(salida.getDate() + 1);
-        // fechaStr2.s]etDate(fechaStr2.getDate() + 1);
-        jornada = [
-          [
-            convertirTiempo(fechaStr, "00:00"),
-            convertirTiempo(fechaStr, "00:00"),
-          ],
-        ];
-      } else {
-        if (diaSemana === 5) {
-          // Sábado
-          jornada = [
-            [
-              convertirTiempo(fechaStr, "08:00"),
-              convertirTiempo(fechaStr, "13:00"),
-            ],
-          ];
-        } else if (diaSemana === 6 || festivo) {
-          // console.log("Domingo | festivo");
-          jornada = [
-            [
-              convertirTiempo(fechaStr, "00:00"),
-              convertirTiempo(fechaStr, "00:00"),
-            ],
-          ];
-        } else if (diaSemana < 5) {
-          if (tipoJornada === "Hoteles") {
-            jornada = [
-              [
-                convertirTiempo(fechaStr, "08:00"),
-                convertirTiempo(fechaStr, "12:00"),
-              ],
-              [
-                convertirTiempo(fechaStr, "13:00"),
-                convertirTiempo(fechaStr, "17:00"),
-              ],
-            ];
-          } else if (tipoJornada === "Clientes Ocasionales") {
-            jornada = [
-              [
-                convertirTiempo(fechaStr, "08:00"),
-                convertirTiempo(fechaStr, "12:00"),
-              ],
-              [
-                convertirTiempo(fechaStr, "14:00"),
-                convertirTiempo(fechaStr, "18:00"),
-              ],
-            ];
-          }
-        } else {
-          throw new Error("Tipo de jornada no válida");
-        }
+        salida.setDate(salida.getDate() + 1); // Cruce de día
       }
 
       let minutosExtrasDiurna = 0;
       let minutosExtrasNocturna = 0;
-      let jorndaDiurna = {
-        inicio: new Date(fechaStr),
-        fin: new Date(fechaStr),
-      };
-      jorndaDiurna.inicio.setHours(6, 0);
-      jorndaDiurna.fin.setHours(19, 0);
 
+      // SE RECORRE MINUTO A MINUTO DESDE LA HORA QUE EMPIEZA HASTA LA HORA QUE TERMINA
       for (
         let actual = new Date(entrada);
         actual < salida;
         actual.setMinutes(actual.getMinutes() + 1)
       ) {
-        const estaDentro = jornada.some(
+        const fechaActual = new Date(actual);
+        const jornadaDelDia = obtenerJornadaPorDia(
+          fechaActual,
+          tipoJornada,
+          fechaActual.toDateString() === entrada.toDateString()
+            ? festivo
+            : false
+        );
+
+        const estaDentro = jornadaDelDia.some(
           ([inicio, fin]) => actual >= inicio && actual < fin
         );
+
+        // Rango diurno: 6:00 a 19:00
+        const inicioDiurno = new Date(actual);
+        inicioDiurno.setHours(6, 0, 0, 0);
+        const finDiurno = new Date(actual);
+        finDiurno.setHours(19, 0, 0, 0);
+
         if (!estaDentro) {
-          if (actual >= jorndaDiurna.inicio && actual < jorndaDiurna.fin) {
+          if (actual >= inicioDiurno && actual < finDiurno) {
             minutosExtrasDiurna++;
           } else {
             minutosExtrasNocturna++;
