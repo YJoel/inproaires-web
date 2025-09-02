@@ -64,17 +64,17 @@ document
     modalTitle.innerHTML = `Horas Extras Empleado: ${em}`;
 
     let hExtras = dataHoras.filter((el) => el.nombre.search(em) != -1);
-    hExtras = hExtras.map((el, index, array) => {
-      array[index]["options"] = `
-        <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#editarHorasExtras" id="editar_${el.id}">
-          <i class="bi bi-pencil-square"></i>
-        </button>
-        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#eliminarHorasExtras" id="eliminar_${el.id}">
-          <i class="bi bi-trash3-fill"></i>
-        </button>
-      `;
-      return el;
-    });
+    // hExtras = hExtras.map((el, index, array) => {
+    //   array[index]["options"] = `
+    //     <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#editarHorasExtras" id="editar_${el.id}">
+    //       <i class="bi bi-pencil-square"></i>
+    //     </button>
+    //     <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#eliminarHorasExtras" id="eliminar_${el.id}">
+    //       <i class="bi bi-trash3-fill"></i>
+    //     </button>
+    //   `;
+    //   return el;
+    // });
 
     setTimeout(function () {
       if (table1) {
@@ -116,7 +116,7 @@ document
               },
             },
             { data: "festivo" },
-            { data: "options" },
+            // { data: "options" },
           ],
         });
       }
@@ -293,7 +293,7 @@ function filtrarPorMes(fechaStr = "", hExtras) {
   return hExtras.filter((h) => h.fecha.search(fechaStr) >= 0);
 }
 
-function actualizarTabla(e) {
+function actualizarGrafica(e) {
   const dataHoras = JSON.parse(sessionStorage.getItem("hExtras"));
   const empleados = JSON.parse(sessionStorage.getItem("empleados"));
 
@@ -305,6 +305,34 @@ function actualizarTabla(e) {
     borderWidth: 1,
   };
   ctx.update();
+}
+
+function actualizarTabla(e) {
+  let empleado = parseInt(e.value);
+  console.log(empleado);
+  let dataHoras = JSON.parse(sessionStorage.getItem("hExtras"));
+  dataHoras = dataHoras.map((el, index, array) => {
+    array[index]["options"] = `
+      <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#editarHorasExtras" id="editar_${el.id}">
+        <i class="bi bi-pencil-square"></i>
+      </button>
+      <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#eliminarHorasExtras" id="eliminar_${el.id}">
+        <i class="bi bi-trash3-fill"></i>
+      </button>
+    `;
+    return el;
+  });
+  let filtro = [];
+  if (empleado) {
+    console.log("If(empleado)");
+    filtro = dataHoras.filter((em) => em.cedula == empleado);
+  } else {
+    filtro = dataHoras;
+  }
+
+  table.clear();
+  table.rows.add(filtro);
+  table.draw();
 }
 
 document.forms["reporte"].addEventListener("submit", bajarReporte);

@@ -372,8 +372,7 @@ if (isset($_GET["logout"])) {
                           <h6 class="m-2 font-weight-bold text-primary">Horas Totales por trabajador</h6>
                         </div>
                         <div class="col">
-                          <input type="month" class="form-control" name="filtroMes" id="filtroMes"
-                            onchange="actualizarTabla(this)">
+                          <input type="month" class="form-control" name="filtroMes" id="filtroMes" onchange="actualizarGrafica(this)">
                         </div>
                       </div>
                     </div>
@@ -395,43 +394,41 @@ if (isset($_GET["logout"])) {
             <div class="col">
               <div class="card shadow mb-4">
                 <div class="card-header">
-                  <div class="row">
-                    <div class="col">
-                      <h6 class="m-0 p-2 font-weight-bold text-primary">Empleados</h6>
-                    </div>
-                  </div>
-                </div>
-                <div class="card-body">
-                  <div class="row justify-content-md-left" id="divEmpleados">
-
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <div class="card shadow mb-4">
-                <div class="card-header">
                   <h6 class="m-0 p-2 font-weight-bold text-primary">Listado de Horas Extras</h6>
                 </div>
                 <div class="card-body">
-                  <table id="hExtras" class="display">
-                    <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Cedula</th>
-                        <th>Fecha</th>
-                        <th>Dia</th>
-                        <th># Hrs Extras</th>
-                        <th>Diurnas</th>
-                        <th>Nocturnas</th>
-                        <th>Festivo</th>
-                        <th>Opciones</th>
-                      </tr>
-                    </thead>
-                  </table>
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-floating mb-3">
+                        <select class="form-select" name="cedula" id="cedula2" onchange="actualizarTabla(this)">
+                          <option value="0">TODOS</option>
+                        </select>
+                        <label for="cedula">Empleado</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <table id="hExtras" class="display">
+                        <thead>
+                          <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Cedula</th>
+                            <th>Fecha</th>
+                            <th>Dia</th>
+                            <th># Hrs Extras</th>
+                            <th>Diurnas</th>
+                            <th>Nocturnas</th>
+                            <th>Festivo</th>
+                            <th>Opciones</th>
+                          </tr>
+                        </thead>
+                      </table>
+                    </div>
+
+                  </div>
+
                 </div>
               </div>
             </div>
@@ -627,12 +624,11 @@ if (isset($_GET["logout"])) {
                             <th>Diurnas</th>
                             <th>Nocturnas</th>
                             <th>Festivo</th>
-                            <th>Opciones</th>
+                            <!-- <th>Opciones</th> -->
                           </tr>
                         </thead>
                       </table>
                     </div>
-                    <!-- <div class="col"></div> -->
                   </div>
                 </div>
               </div>

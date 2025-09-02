@@ -249,9 +249,8 @@ form.addEventListener("submit", calcularHorasExtras);
 function cargarEmpleados() {
   try {
     const select = form["cedula"];
+    const select2 = document.getElementById("cedula2");
     const arrayEmpleados = JSON.parse(sessionStorage.getItem("empleados"));
-    const divEmpledos = document.getElementById("divEmpleados");
-    const button = document.getElementById("defaultButton");
 
     arrayEmpleados.sort((a, b) => {
       return a.nombre.localeCompare(b.nombre);
@@ -259,13 +258,8 @@ function cargarEmpleados() {
     arrayEmpleados.forEach((em) => {
       if (em.nombre.search("JORGE BERTEL") == -1) {
         select.innerHTML += `<option value="${em.cedula}">${em.nombre}</option>`;
-      }
-      if (divEmpledos) {
-        divEmpledos.innerHTML += `<div class="col my-1">
-          <button type="button" style="aspect-ratio: 16/9; width: 7rem;" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#registroHorasEmpleado" data-bs-whatever="${em.nombre}">
-            ${em.nombre}
-          </button>
-        </div>`;
+        if (select2)
+          select2.innerHTML += `<option value="${em.cedula}">${em.nombre}</option>`;
       }
     });
   } catch (error) {
